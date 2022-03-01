@@ -1,6 +1,6 @@
 //Global Variable
 int rightPaddleVelocity = 5;
-Boolean maxHeight=false, maxBottom=false;
+Boolean maxHeightRight = false, maxBottomRight = false;
 
 
 

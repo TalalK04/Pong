@@ -6,7 +6,8 @@ float xPaddleLeft, yPaddleLeft, widthPaddle, heightPaddle, xPaddleRight, yPaddle
 float x1RightNet, y1RightNet, x2RightNet, y2RightNet; //right net line
 float x1MiddleLine, y1MiddleLine, x2MiddleLine, y2MiddleLine; //middle line
 float xLeftScore, yLeftScore, widthScore, heightScore, xRightScore, yRightScore; //score
-
+boolean landscapeMode = false;
+ 
 
 
 
@@ -15,6 +16,17 @@ void setup() {
   //Geometry Communication and Variables for GUI Ratios
   size(700, 500); //Landscape-orientation, //fullScreen(); //displayWidth, displayHeight
   population(); //one purpose of developer written functions
+  
+  if (landscapeMode == true){
+  return;
+  } else {
+    xMove = 0;
+    yMove = 0;
+  }
+  if (height <= width){
+   landscapeMode = true; 
+  }
+  
 }//end setup
 
 void draw() {
