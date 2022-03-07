@@ -25,12 +25,12 @@ void ballMove() {
   if (rightGoal == true) {
     xBall = (x1RightNet + (ballDiameter*2/3));
     yMove = 0;
-    scoreBoardDraw();
+
   } else rightGoal = false;
   if (leftGoal == true) {
     xBall = (x1LeftNet - (ballDiameter*2/3)); 
     yMove = 0;
-    scoreBoardDraw();
+
   } else leftGoal = false;
 
 

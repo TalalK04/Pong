@@ -26,6 +26,9 @@ void setup() {
   } else {
     xMove = 0;
     yMove = 0;
+    background(0);
+    fill(255);
+    textSize(height*1/20);
     text("This game is only compatible in LANDSCAPE mode.  Please change the size of your screen", (height*1/2)-10, width*1/10);
   }
   

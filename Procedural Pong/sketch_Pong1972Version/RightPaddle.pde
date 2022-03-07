@@ -1,5 +1,5 @@
 //Global Variable
-int rightPaddleVelocity = 5;
+int rightPaddleVelocity = 0;
 Boolean maxHeightRight = false, maxBottomRight = false;
 
 
@@ -15,12 +15,25 @@ void rightPaddleDraw () {
 }//end rightPaddleDraw
 
 void rightPaddlekeyPressed() {
+  
   if (key == CODED && keyCode == UP) {
     yPaddleRight -= rightPaddleVelocity;
     //logical conflict avoided
   }//end RightUp
   if (key == CODED && keyCode == DOWN) {
     yPaddleRight += rightPaddleVelocity;
+    
+/////
+    if ((rightPaddleVelocity == 0) && (key == '1')) { //easy
+      rightPaddleVelocity = 1;
+    } 
+    if ((rightPaddleVelocity == 0) && (key == '2')) { //medium
+      rightPaddleVelocity = 3;
+    } 
+    if ((rightPaddleVelocity == 0) && (key == '3')) { //hard
+      rightPaddleVelocity = 10;
+    }
+/////
   }//end RightPaddle
 }
 

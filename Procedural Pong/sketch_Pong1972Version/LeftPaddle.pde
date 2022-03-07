@@ -25,12 +25,25 @@ void leftPaddleDraw () {
 }//edn LeftPaddle
 
 void leftPaddlekeyPressed() {
+  
   if (key == 'W' || key == 'w') {
     yPaddleLeft -= leftPaddleVelocity;
     //logical conflict avoided
   }//end RightUp
   if (key == 'S' || key == 's') {
     yPaddleLeft += leftPaddleVelocity;
+    
+    /////
+    if ((leftPaddleVelocity == 0) && (key == 'e'|| key == 'E')) { //easy
+      leftPaddleVelocity = 1;
+    } 
+    if ((leftPaddleVelocity == 0) && (key == 'm'|| key == 'M')) { //medium
+      leftPaddleVelocity = 3;
+    } 
+    if ((leftPaddleVelocity == 0) && (key == 'h'|| key == 'H')) { //hard
+      leftPaddleVelocity = 10;
+    }
+/////
   }//end leftPaddle
 }
 
