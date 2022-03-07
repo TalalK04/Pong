@@ -25,10 +25,12 @@ void ballMove() {
   if (rightGoal == true) {
     xBall = (x1RightNet + (ballDiameter*2/3));
     yMove = 0;
+    scoreBoardDraw();
   } else rightGoal = false;
   if (leftGoal == true) {
     xBall = (x1LeftNet - (ballDiameter*2/3)); 
     yMove = 0;
+    scoreBoardDraw();
   } else leftGoal = false;
 
 
@@ -42,16 +44,15 @@ void ballMove() {
   if ((xBall == xPaddleLeft + (widthPaddle + ballDiameter*1/2)) && ((yBall >= yPaddleLeft) && (yBall <= (yPaddleLeft + heightPaddle)))) {
     //yMove = (yMove-1);
     xMove = (xMove*-1);
-    println("TRUE");
-  
+    //println("TRUE");
   } else if ((xBall >= xPaddleRight - (ballDiameter*1/2)) && ((yBall >= yPaddleRight) && (yBall <= (yPaddleRight + heightPaddle)))) {
     //yMove = (yMove*-1);
     xMove = (xMove*-1);
-    println("TRUE");
+    //println("TRUE");
   } 
 
 
-  println(yMove, "+", xMove);
+  //println(yMove, "+", xMove);
 }//end ballMove
 
 void ballStart() {

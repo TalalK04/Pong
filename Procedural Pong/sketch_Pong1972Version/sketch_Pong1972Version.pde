@@ -17,14 +17,16 @@ void setup() {
   size(700, 500); //Landscape-orientation, //fullScreen(); //displayWidth, displayHeight
   population(); //one purpose of developer written functions
   
-  if (landscapeMode == true){
+  if (height <= width){
+   landscapeMode = true; 
+  }
+  
+    if (landscapeMode == true){
   return;
   } else {
     xMove = 0;
     yMove = 0;
-  }
-  if (height <= width){
-   landscapeMode = true; 
+    text("This game is only compatible in LANDSCAPE mode.  Please change the size of your screen", (height*1/2)-10, width*1/10);
   }
   
 }//end setup
@@ -32,6 +34,7 @@ void setup() {
 void draw() {
   background(0);
   //objects use varibales to ID purpose of function
+  
   ball();
   leftPaddleDraw(); //another pupose of developer written functions
   rightPaddleDraw();
