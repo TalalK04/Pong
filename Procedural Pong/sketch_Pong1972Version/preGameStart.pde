@@ -8,14 +8,14 @@ void preGameStart() {
   text("This game is only compatible in LANDSCAPE mode \n Please change the size of your screen.", width*1/10, height*1/2);
 }//end preGameStart
 
-void chooseMode(){
+void chooseMode() {
   background(0);
   fill(255); 
   textSize(width*1/35);
   text("Choose the difficulty: \n Easy: RightPaddle (press '1') | LeftPaddle (press 'e')  \n Medium: RightPaddle (press '2') | LeftPaddle (press 'm')  \n Hard: RightPaddle (press '3') | LeftPaddle (press 'h')", width*1/10, height*1/4);
 }//end chooseMode
 
-void choosePlayerNum(){
+void choosePlayerNum() {
   background(0);
   fill(255); 
   textSize(width*1/35);

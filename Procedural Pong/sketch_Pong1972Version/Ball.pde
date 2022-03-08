@@ -4,8 +4,6 @@ boolean leftGoal = false;
 int leftScore = 0;
 int rightScore = 0;
 
-
-
 void ball () {
   ballStart();
   ballMove();
@@ -26,7 +24,7 @@ void ballMove() {
   }
   if (rightGoal == true) {
     xBall = (x1RightNet + (ballDiameter*2/3));
-    yMove = 0; 
+    yMove = 0;
   } else rightGoal = false;
   if (leftGoal == true) {
     xBall = (x1LeftNet - (ballDiameter*2/3)); 

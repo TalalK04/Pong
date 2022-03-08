@@ -4,11 +4,11 @@
 //Global Variables
 PFont titleFont;
 
-color blackInk=000000; //Daytime only, not for night mode 
+color blackInk=000000; 
 color resetColor=#FFFFFF;
 //
 void textSetup() {
-  titleFont = createFont("Harrington", 55);
+  titleFont = createFont("Verdana", 55);
 }//End textSetup()
 
 

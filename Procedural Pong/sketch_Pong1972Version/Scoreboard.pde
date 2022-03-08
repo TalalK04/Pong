@@ -3,7 +3,7 @@ void scoreBoard() {
 }//end ScoreBoard
 
 void scoreBoardDraw() {
-  
+
   if (rightGoal == true) {
     leftScore = 1;
     textDraw(height, blackInk, CENTER, CENTER, titleFont, str(leftScore), xLeftScore, yLeftScore, widthScore, heightScore); //Left Score
@@ -12,12 +12,10 @@ void scoreBoardDraw() {
     rightScore = 1;
     textDraw(height, blackInk, CENTER, CENTER, titleFont, str(rightScore), xRightScore, yRightScore, widthScore, heightScore); //Right Score
   }
-  
-    if (leftGoal == false || rightGoal == false) {
+
+  if (rightGoal == false) {
     textDraw(height, blackInk, CENTER, CENTER, titleFont, str(leftScore), xLeftScore, yLeftScore, widthScore, heightScore); //Left Score
-    textDraw(height, blackInk, CENTER, CENTER, titleFont, str(rightScore), xRightScore, yRightScore, widthScore, heightScore); //Right Score
   }
-  
 }//End draw()
 
 void scoreBoardRect() {

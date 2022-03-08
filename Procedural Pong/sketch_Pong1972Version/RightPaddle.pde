@@ -11,9 +11,8 @@ void rightPaddleDraw () {
   if (screenSaver == true || singlePlayer == true) {
     yPaddleRight = yBall - heightPaddle*1/2;
   }
-    if (yPaddleRight >= (height-heightPaddle)) yPaddleRight = height-heightPaddle;
-    if (yPaddleRight <= height*0) yPaddleRight = height*0;
-  
+  if (yPaddleRight >= (height-heightPaddle)) yPaddleRight = height-heightPaddle;
+  if (yPaddleRight <= height*0) yPaddleRight = height*0;
 }//end rightPaddleDraw
 
 void rightPaddlekeyPressed() {
@@ -40,7 +39,6 @@ void rightPaddlekeyPressed() {
   /////
 
   if ((leftMode == true && rightMode == true) && (key == 'c'|| key == 'C')) screenSaver = true;
-  
 }//end RightPaddle
 
 
