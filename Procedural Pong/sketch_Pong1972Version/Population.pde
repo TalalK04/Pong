@@ -26,6 +26,6 @@ void population() {
   //
   yPaddleLeft = height*1/2 - (heightPaddle*1/2);
   //
-  while (xMove==0 || xMove == 1 || xMove == 2) xMove = int( random( -3, 3) );
-  while (yMove==0 || yMove == 1 || yMove == 2) yMove = int( random( -3, 3) );
+  while (xMove==0) xMove = int(random( -2, 2));
+  while (yMove==0) yMove = int(random( -2, 2));
 }//End population
