@@ -1,7 +1,7 @@
 //Global Variable
 int leftPaddleVelocity = 0;
 boolean leftMode = false;
-boolean singlePlayer = true;
+boolean singlePlayer = false;
 
 
 
@@ -9,27 +9,28 @@ void leftPaddleDraw () {
 
   leftPaddleStart(); //might have to move outside draw()
 
-  if (yPaddleLeft >= (height-heightPaddle) ) {
-    yPaddleLeft = height-heightPaddle;
+  //if (singlePlayer == true) {
+  //  yPaddleRight = yBall - heightPaddle*1/2;
+  //}
+
+
+  if (screenSaver == true) {
+    yPaddleLeft = yBall - heightPaddle*1/2;
   } 
-  if (yPaddleLeft <= height*0) {
-    yPaddleLeft = height*0;
-  }
-  if(screenSaver == true) {
-   println("true");
-  }
+
+  if (yPaddleLeft >= (height-heightPaddle)) yPaddleLeft = height-heightPaddle;
+  if (yPaddleLeft <= height*0) yPaddleLeft = height*0;
 }//end LeftPaddle
 
 void leftPaddlekeyPressed() {
 
-  if ((leftPaddleVelocity == 0) && (key == 'W' || key == 'w')) {
+  if ((key == 'W' || key == 'w')  && (singlePlayer == true || twoPlayer == true)) {
     yPaddleLeft -= leftPaddleVelocity;
   } 
-  if ((leftPaddleVelocity == 0) && (key == 'S' || key == 's')) {
+  if ((key == 'S' || key == 's') && (singlePlayer == true || twoPlayer == true)) {
     yPaddleLeft += leftPaddleVelocity;
   }
 
-  /////
   if ((leftPaddleVelocity == 0) && (key == 'e'|| key == 'E')) { //easy
     leftPaddleVelocity = 1;
     leftMode = true;
@@ -40,11 +41,10 @@ void leftPaddlekeyPressed() {
     leftPaddleVelocity = 10;
     leftMode = true;
   }
-  /////
 
-  if ((key == 's'|| key == 'S')) {
-    screenSaver = true;
-  }
+
+  if ((leftMode == true && rightMode == true) && (key == 'p'|| key == 'P')) singlePlayer = true;
+  if ((leftMode == true && rightMode == true) && (key == 't'|| key == 'T')) twoPlayer = true;
 } //end leftPaddle
 
 
