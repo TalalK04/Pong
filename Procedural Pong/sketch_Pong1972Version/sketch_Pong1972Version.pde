@@ -15,17 +15,14 @@ void setup() {
   size(700, 500); 
   population(); 
   if (height < width) landscapeMode = true;
+  
 
-  if (screenSaver == true) println("screenSaver");
-  if (singlePlayer == true) println("singlePlayer");
 
 }//end setup
 
 void draw() {
   background(0);
-
-
-
+  
   if (landscapeMode == false) {
     preGameStart();
   } else if ((landscapeMode == true)  && (leftMode == false || rightMode == false)) {
@@ -38,7 +35,6 @@ void draw() {
 }//end draw
 
 void keyPressed() {
-
   rightPaddlekeyPressed();
   leftPaddlekeyPressed();
 }//end keyPressed
