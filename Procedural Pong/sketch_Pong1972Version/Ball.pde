@@ -47,7 +47,7 @@ void ballMove() {
     xMove = (xMove*-1);
   }
   println(leftScore);
-  println(rightScore);
+
 }//end ballMove
 
 void ballStart() {

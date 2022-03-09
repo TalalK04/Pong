@@ -1,7 +1,3 @@
-//Copy over all text lines
-//Refer to procedures to execute in setup(), draw(), and whenever drawing text
-//
-//Global Variables
 PFont titleFont;
 
 color blackInk=000000; 
@@ -14,9 +10,10 @@ void textSetup() {
 
 void preDrawText(float height, color ink, int alignHorizontal, int alignVertical, PFont font) {
   fill(ink);
-  textAlign(alignHorizontal, alignVertical); 
-  textFont(font, height);
+  textAlign(alignHorizontal, alignVertical);
 }//End preDrawText
+
+
 
 void textDraw(float height, color ink, int alignHorizontal, int alignVertical, PFont font, String string, float xScore, float yScore, float widthScore, float heightScore) {
   preDrawText(height, ink, alignHorizontal, alignVertical, font);

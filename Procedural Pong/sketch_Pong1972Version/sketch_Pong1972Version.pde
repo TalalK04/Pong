@@ -19,21 +19,18 @@ void setup() {
 void draw() {
   background(0);
 
-  if (leftGoal == true || rightGoal == true) {
-    goalScored();
-  } else if (restart == false) {
-    gameStart();
-  }
-
-
   if (landscapeMode == false) {
     preGameStart();
   } else if ((landscapeMode == true)  && (leftMode == false || rightMode == false)) {
     chooseMode();
   } else if ((landscapeMode == true)  && (leftMode == true && rightMode == true) && (singlePlayer == false && screenSaver == false && twoPlayer == false)) {
     choosePlayerNum();
-  } else if ((landscapeMode == true)  && (leftMode == true && rightMode == true) && (screenSaver == true || singlePlayer == true || twoPlayer == true)) {
+  } else if ((landscapeMode == true)  && (leftMode == true && rightMode == true) && (screenSaver == true || singlePlayer == true || twoPlayer == true) && (restart == false)) {
     gameStart();
+  }
+  
+    if (leftGoal == true || rightGoal == true) {
+    goalScored();
   }
 }//end draw
 

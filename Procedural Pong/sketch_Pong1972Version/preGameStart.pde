@@ -1,4 +1,3 @@
-
 void preGameStart() {
   xMove = 0;
   yMove = 0;
