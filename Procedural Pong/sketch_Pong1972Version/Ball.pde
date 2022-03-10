@@ -3,6 +3,7 @@ boolean rightGoal = false;
 boolean leftGoal = false;
 int leftScore = 0;
 int rightScore = 0;
+int bounce = 0;
 
 void ball () {
   ballStart();
@@ -11,11 +12,17 @@ void ball () {
 
 void ballMove() {
 
+  //if (bounce == 5){ 
+  //heightPaddle = (heightPaddle*0.9);
+  //}
+
   if (yBall >= height -(ballDiameter*1/2)) {
-    yMove= -1;
+    yMove= (yMove*-1);
+    bounce += 1;
   }
   if (yBall <= height*0 +(ballDiameter*1/2)) {
-    yMove = 1;
+    yMove = (yMove*-1);
+    bounce += 1;
   }
 
   if ((leftGoal && rightGoal) == false) {
@@ -29,6 +36,7 @@ void ballMove() {
   if (leftGoal == true) {
     xBall = (x1LeftNet - (ballDiameter*2/3)); 
     yMove = 0;
+    bounce += 1;
   } else leftGoal = false;
 
 
@@ -43,11 +51,12 @@ void ballMove() {
 
   if ((xBall == xPaddleLeft + (widthPaddle + ballDiameter*1/2)) && ((yBall >= yPaddleLeft) && (yBall <= (yPaddleLeft + heightPaddle)))) {
     xMove = (xMove*-1);
+    bounce += 1;
   } else if ((xBall >= xPaddleRight - (ballDiameter*1/2)) && ((yBall >= yPaddleRight) && (yBall <= (yPaddleRight + heightPaddle)))) {
     xMove = (xMove*-1);
+    bounce += 1;
   }
-  println(leftScore);
-
+  println(bounce);
 }//end ballMove
 
 void ballStart() {
