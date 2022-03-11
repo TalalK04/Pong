@@ -1,5 +1,4 @@
 //Global variables
-//Best Practie: initialization on similar lines;
 float xBall, yBall, ballDiameter;
 float x1LeftNet, y1LeftNet, x2LeftNet, y2LeftNet; // left net line
 float xPaddleLeft, yPaddleLeft, widthPaddle, heightPaddle, xPaddleRight, yPaddleRight; // right/left paddles
@@ -11,14 +10,14 @@ boolean twoPlayer = false;
 boolean restart = false;
 
 void setup() {
-  size(700, 500); 
+  size(1000, 700); 
   population(); 
   if (height < width) landscapeMode = true;
 }//end setup
 
 void draw() {
   background(0);
-
+  
   if (landscapeMode == false) {
     preGameStart();
   } else if ((landscapeMode == true)  && (leftMode == false || rightMode == false)) {
@@ -28,8 +27,8 @@ void draw() {
   } else if ((landscapeMode == true)  && (leftMode == true && rightMode == true) && (screenSaver == true || singlePlayer == true || twoPlayer == true) && (restart == false)) {
     gameStart();
   }
-  
-    if (leftGoal == true || rightGoal == true) {
+
+  if (leftGoal == true || rightGoal == true) {
     goalScored();
   }
 }//end draw

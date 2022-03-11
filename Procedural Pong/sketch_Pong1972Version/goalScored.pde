@@ -1,9 +1,10 @@
 void goalScored() {
-  background(0);
   population();
-  println("Youu scoorrre!");
-  println("Press 'r' to play again");
-  leftGoal = false;
-  rightGoal = false;
+  background(0);
+  fill(255); 
+  textSize(width*1/35);
+  text("GOALLL! \n Press 'r' to play again", width*1/2, height*1/2);
   restart = true;
+  godMode = false;
+  bounce = 0;
 }

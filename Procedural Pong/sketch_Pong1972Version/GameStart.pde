@@ -1,4 +1,6 @@
 void gameStart() {
+  leftGoal = false;
+  rightGoal = false;
   background(0);
   ball();
   stroke(255);

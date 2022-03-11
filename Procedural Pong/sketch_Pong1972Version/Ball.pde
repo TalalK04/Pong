@@ -4,6 +4,7 @@ boolean leftGoal = false;
 int leftScore = 0;
 int rightScore = 0;
 int bounce = 0;
+boolean godMode = false;
 
 void ball () {
   ballStart();
@@ -12,9 +13,19 @@ void ball () {
 
 void ballMove() {
 
-  //if (bounce == 5){ 
-  //heightPaddle = (heightPaddle*0.9);
-  //}
+  if (godMode == true && (xMove<0 && yMove<0)) {
+    xMove = -4;
+    yMove = -4;
+  } else if (godMode == true && (xMove>0 && yMove>0)) {
+    xMove = 4;
+    yMove = 4;
+  } else if (godMode == false && (xMove>0 && yMove>0)) {
+    xMove = 2;
+    yMove = 2;
+  } else if (godMode == false && (xMove<0 && yMove<0)) {
+    xMove = -2;
+    yMove = -2;
+  }
 
   if (yBall >= height -(ballDiameter*1/2)) {
     yMove= (yMove*-1);
@@ -24,7 +35,6 @@ void ballMove() {
     yMove = (yMove*-1);
     bounce += 1;
   }
-
   if ((leftGoal && rightGoal) == false) {
     xBall+=xMove;
     yBall+=yMove;
@@ -42,21 +52,33 @@ void ballMove() {
 
   if (xBall >= x1RightNet -(ballDiameter*1/2)) {
     rightGoal = true;
-    //leftScore = leftScore + 1;
   } 
   if (xBall <= x1LeftNet +(ballDiameter*1/2)) {
     leftGoal = true;
-    //rightScore = rightScore + 1;
   }
 
-  if ((xBall == xPaddleLeft + (widthPaddle + ballDiameter*1/2)) && ((yBall >= yPaddleLeft) && (yBall <= (yPaddleLeft + heightPaddle)))) {
+  if ((xBall <= xPaddleLeft + (widthPaddle + ballDiameter*1/2)) && ((yBall >= yPaddleLeft) && (yBall <= (yPaddleLeft + heightPaddle)))) {
     xMove = (xMove*-1);
     bounce += 1;
   } else if ((xBall >= xPaddleRight - (ballDiameter*1/2)) && ((yBall >= yPaddleRight) && (yBall <= (yPaddleRight + heightPaddle)))) {
     xMove = (xMove*-1);
     bounce += 1;
   }
-  println(bounce);
+
+  if (bounce == 5) { 
+    heightPaddle = height*1/6;
+  } else if (bounce == 10) { 
+    heightPaddle = height*1/7;
+  } else if (bounce == 15) { 
+    heightPaddle = height*1/10;
+  } else if (bounce == 20) { 
+    heightPaddle = height*1/12;
+  } else if (bounce == 25) { 
+    heightPaddle = height*1/15;
+  }
+  if (bounce >= 5) {
+    godMode = true;
+  }
 }//end ballMove
 
 void ballStart() {
