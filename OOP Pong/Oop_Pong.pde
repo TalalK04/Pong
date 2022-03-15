@@ -2,14 +2,17 @@
 
 void setup() {
   size(700, 500); 
-
+  
   //An object is... See the class
-  Ball myBall = new Ball(width*1/10, height*1/3, width*1/25, color(31, 255, 3)); //line can be anywhere
-  Ball yourBall = new Ball(width*9/10, height*1/3, width*1/25, color(31, 255, 3));
+  Ball myBall = new Ball(); //line can be anywhere
+  //A Constructor is... 
+  myBall.x = width*1/10;
+  myBall.y = height*1/3;
+  myBall.diameter = width*1/25;
+  myBall.colour = color(31, 255, 3); //Hexidecimal: #1FF03, Night Mode friendly
   //
-  myBall.draw();
-  yourBall.draw(); //Notice Bug
-  //
+  fill(myBall.colour);
+  ellipse(myBall.x, myBall.y, myBall.diameter, myBall.diameter);
   println("Exciting... not exciting"); //Ball Object immediately deleted, local variable
   //exit(); //Exit Button, TBA
 }//end setup
@@ -19,4 +22,5 @@ void draw() {
 }//end draw
 
 void keyPressed() {
+  
 }//end mousePressed
