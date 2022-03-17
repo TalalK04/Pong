@@ -1,4 +1,4 @@
-// Global Variables
+// Global Variables And Objects
 Ball myBall; 
 Ball yourBall;
 
@@ -19,9 +19,13 @@ void draw() {
   background(255);
   myBall.draw();
   yourBall.draw(); //Notice Bug
+  //
+  ballCollisions();
  }//end draw
 
 void keyPressed() {
+  //Press W-S-D for Left Paddle
+  //Press UP-DOWN-LEFT Arrows for Right Paddle
 }//end keyPresseded
 
 void mousePressed() {
