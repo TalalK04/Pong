@@ -15,9 +15,10 @@ private class Ball {
   private color colour, colourReset = #FFFFFF;
   private int xSpeed, ySpeed;
   private boolean nightMode = false;
-  //width*1/10, height*1/3, width*1/25, color(31, 255, 3), 1, 1
-  //width*9/10, height*1/3, width*1/25, color( random(0, 255), random(255), random(255)), 1, 1
-  //float xParameter, float yParameter, float diameterParameter, color colourParameter, int xSpeedParameter, int ySpeedParameter
+  //
+  //int ballCount = 10; //(Static Variable: Do not need an object. True sense of Final Global Varibale)
+  //Knows how many instances of BALL there are - Not just myBall and yourBall
+  
   private Ball(float widthParameter, float heightParameter) { //Constructor Is...
     x = widthParameter*1/2; //Start Ball Location wherever
     y = heightParameter*1/2;
@@ -27,7 +28,8 @@ private class Ball {
     if (nightMode == false) colour = color( random(0, 255), random(255), random(255) ); //Hexidecimal: #1FF03, Night Mode friendly
     if (nightMode == true) colour = color( random(0, 255), random(255), 0 );
     xSpeed = int ( random (width/width, width/width*5) );
-    ySpeed = int ( random (height/height, height/height*5) );;
+    ySpeed = int ( random (height/height, height/height*5) );
+    ;
     xDirection = 0;
     while (xDirection == 0) xDirection = int( random(-2, 2) );
     yDirection = 0;
