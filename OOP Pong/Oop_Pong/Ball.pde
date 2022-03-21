@@ -15,10 +15,11 @@ private class Ball {
   private color colour, colourReset = #FFFFFF;
   private int xSpeed, ySpeed;
   private boolean nightMode = false;
+  private boolean rightGoal = false, leftGoal = false;
   //
   //int ballCount = 10; //(Static Variable: Do not need an object. True sense of Final Global Varibale)
   //Knows how many instances of BALL there are - Not just myBall and yourBall
-  
+
   private Ball(float widthParameter, float heightParameter) { //Constructor Is...
     x = widthParameter*1/2; //Start Ball Location wherever
     y = heightParameter*1/2;
@@ -52,10 +53,33 @@ private class Ball {
   }//end move
 
   void bounceWall() {
-    if (x-diameter*1/2 < width*0 || x+diameter*1/2 > width) xSpeed *= -1;
-    if (y-diameter*1/2 < height*0 || y+diameter*1/2 > height) ySpeed *= -1; //Top and Bottom
+    if (x-diameter*1/2 < width*0 || x+diameter*1/2 > width) 
+      xSpeed *= -1;
+    if (y-diameter*1/2 < height*0 || y+diameter*1/2 > height) 
+      ySpeed *= -1; //Top and Bottom
+    leftGoal = true;
   }//end Bounce
 
   private void bouncePaddle() {
   }//end bouncePaddle
+
+  private void Goal () {
+    //Ball knows where NET is
+    //Ball knows where NET is
+    if ( ( x < (width*0)+diameter*1/2 ) || ( x > width-diameter*1/2 ) ) {
+      if (x < (width*0)+diameter) {
+      }//rightGoal
+      x = (width*0)+diameter/2;
+      y = y;
+      if (x > (width)-diameter*1/2) {
+      }//leftGoal
+      x = (width)-diameter/2;
+      y = y;
+    }//End Net Detection
+    if ((rightGoal || leftGoal) == true) {
+      //Empty IF
+    } else {
+      ballMove();
+    }
+  }//end goal
 }//End ball

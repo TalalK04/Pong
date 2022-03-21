@@ -7,9 +7,21 @@
 
 class Paddle {
   //Global Variables
+  private color colour;
+  private float xPaddleLeft, yPaddleLeft, widthPaddle, heightPaddle, xPaddleRight, yPaddleRight;
+  private boolean nightMode = false;
   //
-  Paddle() { // General Population
+  Paddle(float width, float height) { // General Population
+    if (nightMode == false) this.colour = color(int (random(100, 255)), int (random(50, 255)), int (random(175, 255)));
+    if (nightMode == true) this.colour = color(int (random(100, 255)), int (random(50, 255)), 0);
+    widthPaddle = int(width*1/50);
+    xPaddleLeft = int(width*1/40);
+    xPaddleRight = int(width*39/40) - widthPaddle;
+    this.yPaddleRight = int(height*1/2) - heightPaddle*1/2;
+    this.yPaddleLeft = yPaddleRight;
+    heightPaddle = int(height*1/5);
   }//End Constructor
+
 
   void draw() {
     leftPaddle();
@@ -17,10 +29,14 @@ class Paddle {
   }//end draw
 
   void leftPaddle() {
+    fill(colour);
+    rect(xPaddleLeft, yPaddleLeft, widthPaddle, heightPaddle);
     move();
   }//end leftPaddle
 
   void rightPaddle() {
+    fill(colour);
+    rect(xPaddleRight, yPaddleRight, widthPaddle, heightPaddle);
     move();
   }//end rightPaddle
 
