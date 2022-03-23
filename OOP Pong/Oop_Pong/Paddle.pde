@@ -41,7 +41,7 @@ class Paddle {
   }//end rightPaddle
 
   void move() {
-    //Needs to stop at Top and Bottom
+
   }//end move
 
   void momentumAddToBall() {
