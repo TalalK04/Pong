@@ -23,6 +23,7 @@ void draw() {
   paddle.draw();
   for (int i=0; i<ballCounter; i++ ) {//Controls each ball of all 10 (ballCount)
     ball[i].draw();
+    //
   }//end ball.draw
 
   //myBall.draw();
