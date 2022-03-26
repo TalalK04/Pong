@@ -40,8 +40,7 @@ private class Ball {
 
   private void draw() {
     fill(colour);
-    textSize(((width*1/2)*(height*1/2))*(1/25));
-    text(leftScore, width*1/20, height*1/20);
+    
     ellipse(x, y, diameter, diameter);
     fill(colourReset);
     //
