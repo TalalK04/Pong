@@ -86,14 +86,26 @@ class Paddle {
     rightDown = true;
     rightUp = false;
   }
-  
+
   boolean twoPlayerGetter () {
     return twoPlayer;
   }
-  
-    boolean singlePlayerGetter () {
+  boolean singlePlayerGetter () {
     return singlePlayer;
   }
+  boolean leftModeSetter () {
+    return leftMode = true;
+  } 
+  boolean rightModeSetter () {
+    return rightMode = true;
+  }
+    boolean leftModeGetter () {
+    return leftMode;
+  } 
+  boolean rightModeGetter () {
+    return rightMode;
+  }
+  
 
   //float xPaddleLeftGetter(){ return xPaddleLeft; }
   //float yPaddleLeftGetter(){ return yPaddleLeft; }
