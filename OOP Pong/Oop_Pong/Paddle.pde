@@ -12,6 +12,11 @@ class Paddle {
   private boolean nightMode = false;
   private boolean leftUp = false, leftDown = false, rightUp = false, rightDown = false, rightStop = false, leftStop = true;
   private int leftPaddleVelocity = 2, rightPaddleVelocity = 2;
+  private boolean leftMode = false;
+  private boolean singlePlayer = false;
+  private boolean rightMode = false;
+  private boolean screenSaver = false;
+  private boolean twoPlayer = false;
 
   //
   Paddle(float width, float height) { // General Population
@@ -34,12 +39,18 @@ class Paddle {
     fill(colour);
     rect(xPaddleLeft, yPaddleLeft, widthPaddle, heightPaddle);
     move();
+    if (screenSaver == true) {
+      yPaddleLeft = ball[ballCounter].y - heightPaddle*1/2;
+    }
   }//end leftPaddle
 
   void rightPaddle() {
     fill(colour);
     rect(xPaddleRight, yPaddleRight, widthPaddle, heightPaddle);
     move();
+    if (screenSaver == true) {
+      yPaddleRight = ball[ballCounter].y - heightPaddle*1/2;
+    }
   }//end rightPaddle
 
   void move() {
@@ -51,7 +62,6 @@ class Paddle {
     if (yPaddleLeft < height*0) yPaddleLeft = height*0; 
     if (yPaddleRight > (height-heightPaddle)) yPaddleRight = height - heightPaddle; 
     if (yPaddleRight < height*0) yPaddleRight = height*0;
-    
   }//end move
 
   void momentumAddToBall() {
@@ -75,6 +85,14 @@ class Paddle {
   public void rightDownSetter() {
     rightDown = true;
     rightUp = false;
+  }
+  
+  boolean twoPlayerGetter () {
+    return twoPlayer;
+  }
+  
+    boolean singlePlayerGetter () {
+    return singlePlayer;
   }
 
   //float xPaddleLeftGetter(){ return xPaddleLeft; }
