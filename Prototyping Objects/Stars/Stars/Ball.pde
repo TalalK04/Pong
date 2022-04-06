@@ -25,18 +25,35 @@ class Ball {
     while (xDirection == 0) xDirection = int( random(-2, 2) );
     yDirection = 0;
     while (yDirection == 0) yDirection = int( random(-2, 2) );
-  }//end Constructor
+  }//end Ball Constructor
 
-  private void draw() {
+  //Star Constructor
+
+  Ball(float widthParameter, float heightParameter, float diameterParameter) {
+    //THIS is not used here
+    x = widthParameter; //Start Ball Location wherever
+    y = heightParameter;
+    diameter =  diameterParameter;
+    colour = (nightMode == false) ? color (random(255), random(255), random(255)) : color (random(255), random(255), 0);
+  }//end Star Constructor
+
+  public void drawBall() {
     fill(colour);
     ellipse(x, y, diameter, diameter);
     fill(colourReset);
     //
     ballMove();
     bounceWall();
-    bouncePaddle();
-    Goal();
-  }// end draw
+  }//end drawBall
+
+  public void drawStar() {
+    fill(colour);
+    ellipse(x, y, diameter, diameter);
+    fill(colourReset);
+    //
+    ballMove();
+    bounceWall();
+  }//end drawStar
 
   private void ballMove() {
     x += xSpeed*xDirection;
@@ -49,53 +66,19 @@ class Ball {
     if (y-diameter*1/2 < height*0 || y+diameter*1/2 > height) 
       ySpeed *= -1; //Top and Bottom
   }//end Bounce
-
-  private void bouncePaddle() {
-    if ((x <= paddle.xPaddleLeft + (paddle.widthPaddle + diameter*1/2)) && ((y >= paddle.yPaddleLeft) && (y <= (paddle.yPaddleLeft + paddle.heightPaddle)))) {
-      xSpeed *= -1;
-    } 
-    if ((x >= paddle.xPaddleRight - (diameter*1/2)) && ((y >= paddle.yPaddleRight) && (y <= (paddle.yPaddleRight + paddle.heightPaddle)))) {
-      xSpeed*=-1;
-    }
-  }//end bouncePaddle
-
-  private void Goal() {
-    if (rightGoal == true) {
-      x = (net.x1RightNet + (diameter*2/3));
-      ySpeed = 0;
-      xSpeed = 0;
-    } else {
-      rightGoal = false; 
-      scoreBoard.leftScoreGetter();
-    }
-    if (leftGoal == true) {
-      x = (net.x1LeftNet - (diameter*2/3)); 
-      ySpeed = 0;
-      xSpeed = 0;
-    } else {
-      leftGoal = false;
-      scoreBoard.rightScoreGetter();
-    }
+  
 
 
-    if (x > net.x1RightNet - (diameter*1/2)) {
-      rightGoal = true;
-    } 
-    if (x < net.x1LeftNet +(diameter*1/2)) {
-      leftGoal = true;
-    }
-  }//end Goal
-
-  boolean rightGoalGetter() {
-    return rightGoal;
-  }
-  boolean leftGoalGetter() {
-    return leftGoal;
-  }
-  boolean rightGoalSetter() {
-    return rightGoal = false;
-  }
-  boolean leftGoalSetter() {
-    return leftGoal = false;
-  }
+//  boolean rightGoalGetter() {
+//    return rightGoal;
+//  }
+//  boolean leftGoalGetter() {
+//    return leftGoal;
+//  }
+//  boolean rightGoalSetter() {
+//    return rightGoal = false;
+//  }
+//  boolean leftGoalSetter() {
+//    return leftGoal = false;
+//  }
 }//End ball
