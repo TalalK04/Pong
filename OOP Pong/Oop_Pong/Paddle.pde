@@ -11,7 +11,7 @@ class Paddle {
   private float xPaddleLeft, yPaddleLeft, widthPaddle, heightPaddle, xPaddleRight, yPaddleRight;
   private boolean nightMode = false;
   private boolean leftUp = false, leftDown = false, rightUp = false, rightDown = false, rightStop = false, leftStop = true;
-  private int leftPaddleVelocity = 2, rightPaddleVelocity = 2;
+  private int leftPaddleVelocity = 0, rightPaddleVelocity = 0;
   private boolean leftMode = false;
   private boolean singlePlayer = false;
   private boolean rightMode = false;
@@ -39,6 +39,7 @@ class Paddle {
     fill(colour);
     rect(xPaddleLeft, yPaddleLeft, widthPaddle, heightPaddle);
     move();
+    
     if (screenSaver == true) {
       yPaddleLeft = ball[ballCounter].y - heightPaddle*1/2;
     }

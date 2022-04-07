@@ -13,7 +13,7 @@ class ScoreBoard {
     textSize(25);
     text(leftScore, xLeftScore, yLeftScore);
     text(rightScore, xRightScore, yRightScore);
-    for (int i=0; i<ballCounter; i++ ) {
+    for (int i=0; i<ballCounter; i++) {
       if (ball[i].rightGoalGetter() == true) {
         leftScore += 1;
         textSize(25);
@@ -26,7 +26,7 @@ class ScoreBoard {
         ball[i].rightGoalSetter();
       } else {
         leftScore = leftScore + 0;
-                rightScore = rightScore + 0;
+        rightScore = rightScore + 0;
         text(leftScore, xLeftScore, yLeftScore); //Left Score
         text(rightScore, xRightScore, yRightScore); //Right Score
       }

@@ -10,10 +10,14 @@ Net net;
 ScoreBoard scoreBoard;
 boolean landscapeMode = false;
 boolean restart = false;
+int Size;
+boolean gameStart = false;
+
 
 
 void setup() {
   size(700, 500);
+  Size = height*width;
   ball[ballCounter] = new Ball(width, height); //Start the first ball, need ballCounter
   paddle = new Paddle(width, height);
   net = new Net(width, height);
@@ -22,38 +26,42 @@ void setup() {
   ballCounter += 1;
   if (height < width) landscapeMode = true;
   //
+  if (restart == true ) println("hello");
+  if (restart == false ) println("false");
 }//end setup
+
+
 //Object is garbage collected here
 
 void draw() {
   background(0);
 
-  if (landscapeMode == false) {
-    preGameStart();
-  } else if ((landscapeMode == true)  && (paddle.leftModeGetter() == false || paddle.rightModeGetter() == false)) {
-    chooseMode();
-  } else if ((landscapeMode == true)  && (paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (paddle.singlePlayerGetter() == false && paddle.screenSaver == false && paddle.twoPlayer == false)) {
-    choosePlayerNum();
-  } else if ((landscapeMode == true)  && (paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (paddle.screenSaver == true || paddle.singlePlayer == true || paddle.twoPlayer == true) && (restart == false)) {
-    net.draw();
-    paddle.draw();
-    scoreBoard.draw();
-    for (int i=0; i<ballCounter; i++ ) {//Controls each ball of all 10 (ballCount)
-      ball[i].draw();
-    }//end ball.draw
+  if (landscapeMode == false) preGameStart();
+  if ((landscapeMode == true)  && (paddle.leftMode == false || paddle.rightMode == false)) chooseMode();
+  if ((landscapeMode == true)  && (paddle.leftMode == true && paddle.rightMode == true) && (paddle.singlePlayerGetter() == false && paddle.screenSaver == false && paddle.twoPlayer == false)) choosePlayerNum();
+  if ((landscapeMode == true)  && (paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (paddle.screenSaver == true || paddle.singlePlayer == true || paddle.twoPlayer == true) && restart == false) {
+    gameStart();
   }
   for (int i=0; i<ballCounter; i++ ) {
-    if (ball[i].leftGoalGetter() == true || ball[i].rightGoalGetter() == true) {
+    if (ball[i].leftGoal == true || ball[i].rightGoal == true) {
+      restart = true;
       goalScored();
     }
   }//end for
-
-
-  //ballCollisions();
 }//end draw
 
+void gameStart() {
+  net.draw();
+  paddle.draw();
+  scoreBoard.draw();
+  for (int i=0; i<ballCounter; i++ ) {//Controls each ball of all 10 (ballCount)
+    ball[i].draw();
+  }//end ball.draw
+  //gameStart = true;
+}//end gameStart
+
 void preGameStart() {
-  for (int i=ballCounter-1; i<ballCounter; i++ ) {
+  for (int i=ballCounter-1; i<ballCount; i++ ) {
     ball[i].xSpeed = 0;
     ball[i].ySpeed = 0;
   }
@@ -67,7 +75,7 @@ void chooseMode() {
   background(0);
   fill(255); 
   textSize(width*1/35);
-  text("Choose paddle speed:\nFast (EASY): RightPaddle (press '1') | LeftPaddle (press 'e')\nMedium: RightPaddle (press '2') | LeftPaddle (press 'm')\nSlow (HARD): RightPaddle (press '3') | LeftPaddle (press 'h')", width*1/10, height*1/4);
+  text("Choose paddle speed:\nSlow (EASY): RightPaddle (press '1') | LeftPaddle (press 'e')\nMedium: RightPaddle (press '2') | LeftPaddle (press 'm')\nFast (HARD): RightPaddle (press '3') | LeftPaddle (press 'h')", width*1/10, height*1/4);
   text("Left Paddle Controls: W (Up) | S (Down)\nRight Paddle Controls: Up Arrow Key | Down Arrow Key", width*1/10, height*1/1.5);
 }//end chooseMode
 
@@ -80,21 +88,21 @@ void choosePlayerNum() {
   text("GOOD LUCK!", width*1/10, height*1/1.2);
 }//end choosePlayerNum
 
-void goalScored() {
 void keyPressed() {
-  if (key == 'r' || key == 'R') restart = false;
+  if (gameStart == false && ( key == CODED && (key == 'r' || key == 'R') )) restart = false;
+
   //Left Paddle
   if ((key == 'W' || key == 'w') && (paddle.singlePlayerGetter() == true || paddle.twoPlayerGetter() == true)) paddle.leftUpSetter();
   if ((key == 'S' || key == 's') && (paddle.singlePlayerGetter() == true || paddle.twoPlayerGetter() == true)) paddle.leftDownSetter();
-  if ((paddle.leftPaddleVelocity == 0) && (key == 'h'|| key == 'H')) { //easy
-    paddle.leftPaddleVelocity = 10;
-    paddle.leftModeSetter();
+  if ((paddle.leftPaddleVelocity == 0) && (key == 'e'|| key == 'E')) { //easy
+    paddle.leftPaddleVelocity = 2;
+    paddle.leftMode = true;
   } else if ((paddle.leftPaddleVelocity == 0) && (key == 'm'|| key == 'M')) { //medium
     paddle.leftPaddleVelocity = 5;
-    paddle.leftModeSetter();
-  } else if ((paddle.leftPaddleVelocity == 0) && (key == 'e'|| key == 'E')) { //hard
-    paddle.leftPaddleVelocity = 2;
-    paddle.leftModeSetter();
+    paddle.leftMode = true;
+  } else if ((paddle.leftPaddleVelocity == 0) && (key == 'h'|| key == 'H')) { //hard
+    paddle.leftPaddleVelocity = 10;
+    paddle.leftMode = true;
   }
 
   //Choose Mode
@@ -105,31 +113,47 @@ void keyPressed() {
   //Right Paddle
   if ((key == CODED && keyCode == UP)  && (paddle.twoPlayerGetter() == true)) paddle.rightUpSetter();
   if ((key == CODED && keyCode == DOWN)  && (paddle.twoPlayerGetter() == true))paddle.rightDownSetter();
-  if ((paddle.rightPaddleVelocity == 0) && (key == '1')) { //hard
-    paddle.rightPaddleVelocity = 10;
-    paddle.rightModeSetter();
-  } else if ((paddle.rightPaddleVelocity == 0) && (key == '2')) { //medium
-    paddle.rightPaddleVelocity = 5;
-    paddle.rightModeSetter();
-  } else if ((paddle.rightPaddleVelocity == 0) && (key == '3')) { //easy
+  if ((paddle.rightPaddleVelocity == 0) && (key == '1')) { //easy
     paddle.rightPaddleVelocity = 2;
-    paddle.rightModeSetter();
+    paddle.rightMode = true;
+  } else if ((paddle.rightPaddleVelocity == 0) && (key == '2')) { //medium
+    paddle.leftPaddleVelocity = 5;
+    paddle.rightMode = true;
+  } else if ((paddle.rightPaddleVelocity == 0) && (key == '3')) { //hard
+    paddle.rightPaddleVelocity = 10;
+    paddle.rightMode = true;
   }
 }//end keyPresseded
 
 void mousePressed() {
   //Easter Egg Example: mousePressed to create another ball instantiation
 
-  if (ballCounter >= ball.length) {
-    exit();
-  } else if (mousePressed && landscapeMode = true && (paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (paddle.screenSaver == true || paddle.singlePlayer == true || paddle.twoPlayer == true) && (restart == false)) {
+  if (landscapeMode == true && (paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (paddle.screenSaver == true || paddle.singlePlayer == true || paddle.twoPlayer == true) && restart == false) {
     ballCounter += 1;
   }
-  for (int i=ballCounter-1; i<ballCounter; i++ ) { //Constructor for other ball objects could be a button
-    ball[i] = new Ball(width, height);
-    ball[i].draw();
-  }//end Constructor
+  if (ballCounter >= ball.length) {
+    exit();
+  } 
+  for (int i=ballCounter; i<ball.length; i++ ) { //Constructor for other ball objects could be a button
+    if (gameStart == true) {
+      ball[i] = new Ball(width, height);
+      ball[i].draw();
+    }
+  }//end for
 }//end mousePressed
+
+void goalScored() {
+  gameStart = false;
+  background(0);
+  fill(255); 
+  textSize(width*1/35);
+  text("GOALLL! \n Press 'r' to play again", width*1/2, height*1/2);
+}
+
+
+
+
+
 
 
 
