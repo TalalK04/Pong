@@ -56,27 +56,3 @@ void keyPressed() {
 
 void mousePressed() {
 }//end mousePressed
-
-
-//int j = i;
-
-
-
-//  while (j>=0) {  
-//        if ( ((yRandom + diameterRandom*1/2) > (stars[j].y - diameterRandom*1/2)) && ( (yRandom - diameterRandom*1/2) < stars[j].y + diameterRandom*1/2) ) {
-//          yRandom = random (diameterRandom*1/2, appHeight-diameterRandom*1/2);
-//        }//end IF
-//        j--;
-//      }//end while
-//      stars[i] = new Ball ( xRandom, yRandom, diameterRandom );
-
-//for (int j = 0; j < stars.length; j++) {
-//  float d = dist(xRandom, yRandom, stars[j].x, stars[j].y);
-//  if (d < (diameterRandom*1/2 + stars[j].diameter) ) {
-//    overlapping = true;
-//    break;
-//  }
-//}//end j FOR
-//if (overlapping == false) {
-//  stars[i] = new Ball (xRandom, yRandom, diameterRandom);
-//}
