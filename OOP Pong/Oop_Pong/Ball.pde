@@ -16,6 +16,8 @@ private class Ball {
   private int xSpeed, ySpeed;
   private boolean nightMode = false;
   private boolean rightGoal = false, leftGoal = false;
+  private boolean godMode = false;
+  private int bounce = 0;
   //boolean leftPaddleHit = false, rightPaddleHit = false;
 
   //
@@ -32,13 +34,14 @@ private class Ball {
     if (nightMode == true) colour = color( random(0, 255), random(255), 0 );
     xSpeed = int ( random (width/width, width/width*5) );
     ySpeed = int ( random (height/height, height/height*5) );
-    xDirection = 0;
-    while (xDirection == 0) xDirection = int( random(-2, 2) );
-    yDirection = 0;
-    while (yDirection == 0) yDirection = int( random(-2, 2) );
+    while (xSpeed>-2 && xSpeed<2) xSpeed = int(random( -3, 3));
+    while (ySpeed>-2 && ySpeed<2) ySpeed = int(random( -3, 3));
+   
   }//end Constructor
 
   private void draw() {
+    
+    println(bounce);
     fill(colour);
     ellipse(x, y, diameter, diameter);
     fill(colourReset);
@@ -47,34 +50,38 @@ private class Ball {
     bounceWall();
     bouncePaddle();
     Goal();
+    bounceCount();
   }// end draw
 
   private void ballMove() {
-    x += xSpeed*xDirection;
-    y += ySpeed*yDirection;
-  }//end move
+    x += xSpeed;
+    y += ySpeed;
+    }//end move
 
-  void bounceWall() {
-    if (x-diameter*1/2 < width*0 || x+diameter*1/2 > width) 
-      xSpeed *= -1;
+    void bounceWall() {
     if (y-diameter*1/2 < height*0 || y+diameter*1/2 > height) 
       ySpeed *= -1; //Top and Bottom
-  }//end Bounce
+      bounce += 1;
+    }//end Bounce
 
-  private void bouncePaddle() {
+    private void bouncePaddle() {
     if ((x <= paddle.xPaddleLeft + (paddle.widthPaddle + diameter*1/2)) && ((y >= paddle.yPaddleLeft) && (y <= (paddle.yPaddleLeft + paddle.heightPaddle)))) {
       xSpeed *= -1;
+      bounce += 1;
     } 
     if ((x >= paddle.xPaddleRight - (diameter*1/2)) && ((y >= paddle.yPaddleRight) && (y <= (paddle.yPaddleRight + paddle.heightPaddle)))) {
       xSpeed*=-1;
+      bounce += 1;
     }
-  }//end bouncePaddle
+    
+    }//end bouncePaddle
 
-  private void Goal() {
+    private void Goal() {
     if (rightGoal == true) {
       x = (net.x1RightNet + (diameter*2/3));
       ySpeed = 0;
       xSpeed = 0;
+      bounce += 1;
     } else {
       rightGoal = false; 
       scoreBoard.leftScoreGetter();
@@ -95,7 +102,23 @@ private class Ball {
     if (x < net.x1LeftNet +(diameter*1/2)) {
       leftGoal = true;
     }
-  }//end Goal
+    }//end Goal
+    
+    private void bounceCount(){
+         if (bounce < 5) {
+      paddle.heightPaddle = height*1/4;
+    } else if (bounce == 5) { 
+      paddle.heightPaddle = height*1/6;
+    } else if (bounce == 10) { 
+      paddle.heightPaddle = height*1/7;
+    } else if (bounce == 15) { 
+      paddle.heightPaddle = height*1/10;
+    } else if (bounce == 20) { 
+      paddle.heightPaddle = height*1/12;
+    } else if (bounce == 25) { 
+      paddle.heightPaddle = height*1/15;
+    }
+    }//end bounceCount
 
   boolean rightGoalGetter() {
     return rightGoal;

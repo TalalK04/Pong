@@ -16,7 +16,7 @@ boolean gameStart = false;
 
 
 void setup() {
-  size(700, 500);
+  size(1500, 1200);
   Size = height*width;
   ball[ballCounter] = new Ball(width, height); //Start the first ball, need ballCounter
   paddle = new Paddle(width, height);
@@ -28,6 +28,9 @@ void setup() {
   //
   if (restart == true ) println("hello");
   if (restart == false ) println("false");
+ 
+   
+  
 }//end setup
 
 
