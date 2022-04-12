@@ -72,19 +72,18 @@ class Ball {
   }//end Bounce
 
   void starChase() {
-    if ((x < targetX) && (y < targetY)) {
-      x += sqrt((targetX-x)*(targetX-x));
-      y += sqrt((targetY-y)*(targetY-y));
+    if (x < targetX) {
+      x += sqrt(2);
+      y += sqrt(2);
     } else {
-      x -= sqrt((x-targetX)*(x-targetX));
-       y -= sqrt((x-targetX)*(x-targetX));
+      x += (sqrt(2))*-1;
     }
     //
     if (y < targetY) {
-      y++;
-      x++;
+      y += sqrt(2);
+      x += sqrt(2);
     } else {
-      y--;
+      y += (sqrt(2))*-1;
     }
   }//end starChase
 
