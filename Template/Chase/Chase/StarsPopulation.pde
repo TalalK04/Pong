@@ -1,11 +1,11 @@
 void starsPop() {
-    while (overlapping == true) {
+  while (overlapping == true) {
     for ( int i=0; i<starCounter; i++ ) {
       float diameterRandom = random (smallerDisplayDimension*1/8, smallerDisplayDimension*1/4);
       float xRandom = random (0+diameterRandom*1/2, appWidth-diameterRandom*1/2); //No stars should be in the net
       float yRandom = random (0+diameterRandom*1/2, appHeight-diameterRandom*1/2);
-      float d = dist(xRandom, yRandom, stars[i].x, stars[i].y);
       stars[i] = new Ball (xRandom, yRandom, diameterRandom);
+      float d = dist(xRandom, yRandom, stars[i].x, stars[i].y);
       int j = i;
 
       while (j>=0) {
@@ -21,8 +21,8 @@ void starsPop() {
 
     for (int i=0; i<stars.length; i++) {
       for (int j=stars.length-1; j>i; j--) {
-        float distance = dist(stars[j].x, stars[j].y, stars[i].x, stars[i].y);
-        if  ( distance < (stars[j].diameter*1/2 + stars[i].diameter*1/2) ) overlapping = true;
+        float d = dist(stars[j].x, stars[j].y, stars[i].x, stars[i].y);
+        if  ( d < (stars[j].diameter*1/2 + stars[i].diameter*1/2) ) overlapping = true;
       }//end J FOR
     }//end I FOR
   }//end overlapping WHILE

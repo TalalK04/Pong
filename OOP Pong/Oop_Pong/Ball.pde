@@ -59,20 +59,21 @@ private class Ball {
     }//end move
 
     void bounceWall() {
-    if (y-diameter*1/2 < height*0 || y+diameter*1/2 > height) 
+    if (y-diameter*1/2 < height*0 || y+diameter*1/2 > height) {
       ySpeed *= -1; //Top and Bottom
       bounce += 1;
+    } else bounce += 0;
     }//end Bounce
 
     private void bouncePaddle() {
     if ((x <= paddle.xPaddleLeft + (paddle.widthPaddle + diameter*1/2)) && ((y >= paddle.yPaddleLeft) && (y <= (paddle.yPaddleLeft + paddle.heightPaddle)))) {
       xSpeed *= -1;
       bounce += 1;
-    } 
+    }  else bounce += 0;
     if ((x >= paddle.xPaddleRight - (diameter*1/2)) && ((y >= paddle.yPaddleRight) && (y <= (paddle.yPaddleRight + paddle.heightPaddle)))) {
       xSpeed*=-1;
       bounce += 1;
-    }
+    } else bounce += 0;
     
     }//end bouncePaddle
 
@@ -85,6 +86,7 @@ private class Ball {
     } else {
       rightGoal = false; 
       scoreBoard.leftScoreGetter();
+      bounce += 0;
     }
     if (leftGoal == true) {
       x = (net.x1LeftNet - (diameter*2/3)); 
@@ -105,19 +107,15 @@ private class Ball {
     }//end Goal
     
     private void bounceCount(){
-         if (bounce < 5) {
-      paddle.heightPaddle = height*1/4;
-    } else if (bounce == 5) { 
-      paddle.heightPaddle = height*1/6;
-    } else if (bounce == 10) { 
-      paddle.heightPaddle = height*1/7;
-    } else if (bounce == 15) { 
-      paddle.heightPaddle = height*1/10;
-    } else if (bounce == 20) { 
-      paddle.heightPaddle = height*1/12;
-    } else if (bounce == 25) { 
-      paddle.heightPaddle = height*1/15;
-    }
+     if (bounce == 5) { 
+    paddle.heightPaddle = height*1/6;
+  } else if (bounce == 10) { 
+    paddle.heightPaddle = height*1/9;
+  } else if (bounce == 15) { 
+    paddle.heightPaddle = height*1/12;
+  } else if (bounce == 20) { 
+    paddle.heightPaddle = height*1/15;
+  }
     }//end bounceCount
 
   boolean rightGoalGetter() {

@@ -1,5 +1,5 @@
 //Global Variables
-int starCounter = 10;
+int starCounter = 1;
 Ball[] stars = new Ball[starCounter]; // Processing Requires #, Pure Java allows static Variable
 float appWidth, appHeight;
 float  smallerDisplayDimension;

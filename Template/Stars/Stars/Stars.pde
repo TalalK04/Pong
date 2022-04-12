@@ -1,5 +1,5 @@
 //Global Variables
-int starCounter = 10;
+int starCounter = 200;
 Ball[] stars = new Ball[starCounter]; // Processing Requires #, Pure Java allows static Variable
 float appWidth, appHeight;
 float  smallerDisplayDimension;
@@ -16,11 +16,11 @@ void setup() {
 
   while (overlapping == true) {
     for ( int i=0; i<starCounter; i++ ) {
-      float diameterRandom = random (smallerDisplayDimension*1/8, smallerDisplayDimension*1/4);
+      float diameterRandom = random (smallerDisplayDimension*1/100, smallerDisplayDimension*1/150);
       float xRandom = random (0+diameterRandom*1/2, appWidth-diameterRandom*1/2); //No stars should be in the net
       float yRandom = random (0+diameterRandom*1/2, appHeight-diameterRandom*1/2);
-      float d = dist(xRandom, yRandom, stars[i].x, stars[i].y);
       stars[i] = new Ball (xRandom, yRandom, diameterRandom);
+      float d = dist(xRandom, yRandom, stars[i].x, stars[i].y);
       int j = i;
 
       while (j>=0) {

@@ -5,6 +5,7 @@ class Ball {
   private int xSpeed, ySpeed;
   private boolean nightMode = false;
   private boolean rightGoal = false, leftGoal = false;
+  //private float distX = dist(x, targetX);
   //boolean leftPaddleHit = false, rightPaddleHit = false;
 
   //
@@ -71,14 +72,17 @@ class Ball {
   }//end Bounce
 
   void starChase() {
-    if (x < targetX) {
-      x++;
-    } else x--; 
-    {
+    if ((x < targetX) && (y < targetY)) {
+      x += sqrt((targetX-x)*(targetX-x));
+      y += sqrt((targetY-y)*(targetY-y));
+    } else {
+      x -= sqrt((x-targetX)*(x-targetX));
+       y -= sqrt((x-targetX)*(x-targetX));
     }
     //
     if (y < targetY) {
       y++;
+      x++;
     } else {
       y--;
     }

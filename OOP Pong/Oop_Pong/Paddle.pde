@@ -39,7 +39,7 @@ class Paddle {
     fill(colour);
     rect(xPaddleLeft, yPaddleLeft, widthPaddle, heightPaddle);
     move();
-    
+
     if (screenSaver == true) {
       yPaddleLeft = ball[ballCounter].y - heightPaddle*1/2;
     }
@@ -55,10 +55,18 @@ class Paddle {
   }//end rightPaddle
 
   void move() {
-    if (leftUp == true) yPaddleLeft = yPaddleLeft - leftPaddleVelocity;
-    if (leftDown == true) yPaddleLeft = yPaddleLeft + leftPaddleVelocity;
-    if (rightUp == true) yPaddleRight = yPaddleRight - rightPaddleVelocity;
-    if (rightDown == true) yPaddleRight = yPaddleRight + rightPaddleVelocity;
+    if (leftUp == true) { 
+      yPaddleLeft = yPaddleLeft - leftPaddleVelocity;
+    } else if (leftDown == true) {
+      yPaddleLeft = yPaddleLeft + leftPaddleVelocity;
+    } else if (rightUp == true) {
+      yPaddleRight = yPaddleRight - rightPaddleVelocity;
+    } else if (rightDown == true) {
+      yPaddleRight = yPaddleRight + rightPaddleVelocity;
+    } else {
+      rightPaddleVelocity = 0;
+      leftPaddleVelocity = 0;
+    }
     if (yPaddleLeft >= (height-heightPaddle)) yPaddleLeft = height - heightPaddle; 
     if (yPaddleLeft < height*0) yPaddleLeft = height*0; 
     if (yPaddleRight > (height-heightPaddle)) yPaddleRight = height - heightPaddle; 
@@ -100,13 +108,13 @@ class Paddle {
   boolean rightModeSetter () {
     return rightMode = true;
   }
-    boolean leftModeGetter () {
+  boolean leftModeGetter () {
     return leftMode;
   } 
   boolean rightModeGetter () {
     return rightMode;
   }
-  
+
 
   //float xPaddleLeftGetter(){ return xPaddleLeft; }
   //float yPaddleLeftGetter(){ return yPaddleLeft; }

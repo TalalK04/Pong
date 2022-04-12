@@ -28,9 +28,6 @@ void setup() {
   //
   if (restart == true ) println("hello");
   if (restart == false ) println("false");
- 
-   
-  
 }//end setup
 
 
@@ -95,37 +92,40 @@ void keyPressed() {
   if (gameStart == false && ( key == CODED && (key == 'r' || key == 'R') )) restart = false;
 
   //Left Paddle
-  if ((key == 'W' || key == 'w') && (paddle.singlePlayerGetter() == true || paddle.twoPlayerGetter() == true)) paddle.leftUpSetter();
-  if ((key == 'S' || key == 's') && (paddle.singlePlayerGetter() == true || paddle.twoPlayerGetter() == true)) paddle.leftDownSetter();
-  if ((paddle.leftPaddleVelocity == 0) && (key == 'e'|| key == 'E')) { //easy
-    paddle.leftPaddleVelocity = 2;
-    paddle.leftMode = true;
-  } else if ((paddle.leftPaddleVelocity == 0) && (key == 'm'|| key == 'M')) { //medium
-    paddle.leftPaddleVelocity = 5;
-    paddle.leftMode = true;
-  } else if ((paddle.leftPaddleVelocity == 0) && (key == 'h'|| key == 'H')) { //hard
-    paddle.leftPaddleVelocity = 10;
-    paddle.leftMode = true;
-  }
+  if ((key == 'W' || key == 'w') && (paddle.singlePlayerGetter() == true || paddle.twoPlayerGetter() == true)) {
+    paddle.leftUpSetter();
+  } else if ((key == 'S' || key == 's') && (paddle.singlePlayerGetter() == true || paddle.twoPlayerGetter() == true))
+    paddle.leftDownSetter();
+}
+if ((paddle.leftPaddleVelocity == 0) && (key == 'e'|| key == 'E')) { //easy
+  paddle.leftPaddleVelocity = 2;
+  paddle.leftMode = true;
+} else if ((paddle.leftPaddleVelocity == 0) && (key == 'm'|| key == 'M')) { //medium
+  paddle.leftPaddleVelocity = 5;
+  paddle.leftMode = true;
+} else if ((paddle.leftPaddleVelocity == 0) && (key == 'h'|| key == 'H')) { //hard
+  paddle.leftPaddleVelocity = 10;
+  paddle.leftMode = true;
+}
 
-  //Choose Mode
-  if ((paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (key == 'p'|| key == 'P')) paddle.singlePlayer = true;
-  if ((paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (key == 't'|| key == 'T')) paddle.twoPlayer = true;
-  if ((paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (key == 'c'|| key == 'C')) paddle.screenSaver = true;
+//Choose Mode
+if ((paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (key == 'p'|| key == 'P')) paddle.singlePlayer = true;
+if ((paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (key == 't'|| key == 'T')) paddle.twoPlayer = true;
+if ((paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (key == 'c'|| key == 'C')) paddle.screenSaver = true;
 
-  //Right Paddle
-  if ((key == CODED && keyCode == UP)  && (paddle.twoPlayerGetter() == true)) paddle.rightUpSetter();
-  if ((key == CODED && keyCode == DOWN)  && (paddle.twoPlayerGetter() == true))paddle.rightDownSetter();
-  if ((paddle.rightPaddleVelocity == 0) && (key == '1')) { //easy
-    paddle.rightPaddleVelocity = 2;
-    paddle.rightMode = true;
-  } else if ((paddle.rightPaddleVelocity == 0) && (key == '2')) { //medium
-    paddle.leftPaddleVelocity = 5;
-    paddle.rightMode = true;
-  } else if ((paddle.rightPaddleVelocity == 0) && (key == '3')) { //hard
-    paddle.rightPaddleVelocity = 10;
-    paddle.rightMode = true;
-  }
+//Right Paddle
+if ((key == CODED && keyCode == UP)  && (paddle.twoPlayerGetter() == true)) paddle.rightUpSetter();
+if ((key == CODED && keyCode == DOWN)  && (paddle.twoPlayerGetter() == true))paddle.rightDownSetter();
+if ((paddle.rightPaddleVelocity == 0) && (key == '1')) { //easy
+  paddle.rightPaddleVelocity = 2;
+  paddle.rightMode = true;
+} else if ((paddle.rightPaddleVelocity == 0) && (key == '2')) { //medium
+  paddle.leftPaddleVelocity = 5;
+  paddle.rightMode = true;
+} else if ((paddle.rightPaddleVelocity == 0) && (key == '3')) { //hard
+  paddle.rightPaddleVelocity = 10;
+  paddle.rightMode = true;
+}
 }//end keyPresseded
 
 void mousePressed() {
