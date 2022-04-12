@@ -15,8 +15,8 @@ void setup() {
 
 void draw() {
   background(0);
-  for ( int i=0; i<stars.length; i++ ) {
-    stars[i].drawStar();
+  for ( Ball star : stars ) {
+    star.drawStar();
   }//end for population
 }//end draw
 
@@ -24,4 +24,8 @@ void keyPressed() {
 }//end keyPressed
 
 void mousePressed() {
+  for (Ball star : stars) {
+    star.setTargetX(mouseX); 
+    star.setTargetY(mouseY);
+  }
 }//end mousePressed

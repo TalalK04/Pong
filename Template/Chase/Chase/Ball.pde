@@ -1,6 +1,6 @@
 class Ball {
   //Global Variables
-  private float x, y, diameter, xStart, yStart, xDirection, yDirection;
+  private float x, y, diameter, xStart, yStart, xDirection, yDirection, targetX, targetY;
   private color colour, colourReset = #FFFFFF;
   private int xSpeed, ySpeed;
   private boolean nightMode = false;
@@ -35,6 +35,8 @@ class Ball {
     y = heightParameter;
     diameter =  diameterParameter;
     colour = (nightMode == false) ? color (random(255), random(255), random(255)) : color (random(255), random(255), 0);
+    targetX = x;
+    targetY = y;
   }//end Star Constructor
 
   public void drawBall() {
@@ -53,6 +55,7 @@ class Ball {
     //
     ballMove();
     bounceWall();
+    starChase();
   }//end drawStar
 
   private void ballMove() {
@@ -66,19 +69,40 @@ class Ball {
     if (y-diameter*1/2 < height*0 || y+diameter*1/2 > height) 
       ySpeed *= -1; //Top and Bottom
   }//end Bounce
-  
+
+  void starChase() {
+    if (x < targetX) {
+      x++;
+    } else x--; 
+    {
+    }
+    //
+    if (y < targetY) {
+      y++;
+    } else {
+      y--;
+    }
+  }//end starChase
 
 
-//  boolean rightGoalGetter() {
-//    return rightGoal;
-//  }
-//  boolean leftGoalGetter() {
-//    return leftGoal;
-//  }
-//  boolean rightGoalSetter() {
-//    return rightGoal = false;
-//  }
-//  boolean leftGoalSetter() {
-//    return leftGoal = false;
-//  }
+  void setTargetX(int iParameter) {
+    targetX = iParameter;
+  }// end setTargetX
+
+  void setTargetY(int iParameter) {
+    targetY = iParameter;
+  }// end setTargetY
+
+  boolean rightGoalGetter() {
+    return rightGoal;
+  }
+  boolean leftGoalGetter() {
+    return leftGoal;
+  }
+  boolean rightGoalSetter() {
+    return rightGoal = false;
+  }
+  boolean leftGoalSetter() {
+    return leftGoal = false;
+  }
 }//End ball
