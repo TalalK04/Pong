@@ -55,7 +55,7 @@ void gameStart() {
   paddle.draw();
   scoreBoard.draw();
   for (int i=0; i<ballCounter; i++ ) {//Controls each ball of all 10 (ballCount)
-    ball[i].draw();
+    ball[i].ballDraw();
   }//end ball.draw
   //gameStart = true;
 }//end gameStart
@@ -92,11 +92,13 @@ void keyPressed() {
   if (gameStart == false && ( key == CODED && (key == 'r' || key == 'R') )) restart = false;
 
   //Left Paddle
-  if ((key == 'W' || key == 'w') && (paddle.singlePlayerGetter() == true || paddle.twoPlayerGetter() == true)) {
+  if ((key == 'W' || key == 'w') && (paddle.singlePlayerGetter() == true || paddle.twoPlayerGetter() == true )) {
     paddle.leftUpSetter();
-  } else if ((key == 'S' || key == 's') && (paddle.singlePlayerGetter() == true || paddle.twoPlayerGetter() == true))
+  } 
+  if ((key == 'S' || key == 's') && (paddle.singlePlayerGetter() == true || paddle.twoPlayerGetter() == true)) {
     paddle.leftDownSetter();
-}
+  }
+
 if ((paddle.leftPaddleVelocity == 0) && (key == 'e'|| key == 'E')) { //easy
   paddle.leftPaddleVelocity = 2;
   paddle.leftMode = true;
@@ -140,7 +142,7 @@ void mousePressed() {
   for (int i=ballCounter; i<ball.length; i++ ) { //Constructor for other ball objects could be a button
     if (gameStart == true) {
       ball[i] = new Ball(width, height);
-      ball[i].draw();
+      ball[i].ballDraw();
     }
   }//end for
 }//end mousePressed
@@ -151,6 +153,8 @@ void goalScored() {
   fill(255); 
   textSize(width*1/35);
   text("GOALLL! \n Press 'r' to play again", width*1/2, height*1/2);
+  
+    
 }
 
 

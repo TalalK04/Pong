@@ -35,13 +35,31 @@ private class Ball {
     xSpeed = int ( random (width/width, width/width*5) );
     ySpeed = int ( random (height/height, height/height*5) );
     while (xSpeed>-2 && xSpeed<2) xSpeed = int(random( -3, 3));
-    while (ySpeed>-2 && ySpeed<2) ySpeed = int(random( -3, 3));
-   
-  }//end Constructor
+    while (ySpeed>-2 && ySpeed<2) ySpeed = int(random( -3, 3)); 
+  }//end Ball Constructor
+  
+  //Start Start Constructor
+   Ball(float widthParameter, float heightParameter, float diameterParameter) {
+    //THIS is not used here
+    x = widthParameter; //Start Ball Location wherever
+    y = heightParameter;
+    diameter =  diameterParameter;
+    colour = (nightMode == false) ? color (random(255), random(255), random(255)) : color (random(255), random(255), 0);
+  }//end Star Constructor
 
-  private void draw() {
-    
-    println(bounce);
+  private void ballDraw() {
+    fill(colour);
+    ellipse(x, y, diameter, diameter);
+    fill(colourReset);
+    //
+    ballMove();
+    bounceWall();
+    bouncePaddle();
+    Goal();
+    bounceCount();
+  }// end draw
+  
+    private void starDraw() {
     fill(colour);
     ellipse(x, y, diameter, diameter);
     fill(colourReset);
@@ -129,5 +147,9 @@ private class Ball {
   }
   boolean leftGoalSetter() {
     return leftGoal = false;
+  }
+  
+  float ballYGetter () {
+    return y;
   }
 }//End ball

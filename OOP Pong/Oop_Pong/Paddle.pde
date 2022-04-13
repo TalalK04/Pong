@@ -39,87 +39,90 @@ class Paddle {
     fill(colour);
     rect(xPaddleLeft, yPaddleLeft, widthPaddle, heightPaddle);
     move();
+    for (int i=0; i<ballCounter; i++ ) {
+      if (screenSaver == true) {
+        yPaddleLeft = ball[i].ballYGetter() - heightPaddle*1/2;
+      }//end IF
+    }//end FOR
+    }//end leftPaddle
 
-    if (screenSaver == true) {
-      yPaddleLeft = ball[ballCounter].y - heightPaddle*1/2;
+    void rightPaddle() {
+      fill(colour);
+      rect(xPaddleRight, yPaddleRight, widthPaddle, heightPaddle);
+      move();
+      for (int i=0; i<ballCounter; i++ ) {
+        if (screenSaver == true || singlePlayer == true) {
+          yPaddleRight = ball[i].ballYGetter() - heightPaddle*1/2;
+        }//end IF
+      }//end FOR
+    }//end rightPaddle
+
+    void move() {
+      if (leftUp == true) { 
+        yPaddleLeft = yPaddleLeft - leftPaddleVelocity;
+      } else if (leftDown == true) {
+        yPaddleLeft = yPaddleLeft + leftPaddleVelocity;
+      } else if (rightUp == true) {
+        yPaddleRight = yPaddleRight - rightPaddleVelocity;
+      } else if (rightDown == true) {
+        yPaddleRight = yPaddleRight + rightPaddleVelocity;
+      } else {
+        rightPaddleVelocity = 0;
+        leftPaddleVelocity = 0;
+      }
+      if (yPaddleLeft >= (height-heightPaddle)) yPaddleLeft = height - heightPaddle; 
+      if (yPaddleLeft < height*0) yPaddleLeft = height*0; 
+      if (yPaddleRight > (height-heightPaddle)) yPaddleRight = height - heightPaddle; 
+      if (yPaddleRight < height*0) yPaddleRight = height*0;
+    }//end move
+
+    void momentumAddToBall() {
+    }//end momentumAddTooBall
+    //if the paddle is moving, increase the movement of the ball in the direction of the paddle
+    //if the paddle is stationary, increase the x-axis movement only
+    //ability is controlled in configuration (on or off)
+
+    public void leftUpSetter() {
+      leftUp = true;
+      leftDown = false;
     }
-  }//end leftPaddle
-
-  void rightPaddle() {
-    fill(colour);
-    rect(xPaddleRight, yPaddleRight, widthPaddle, heightPaddle);
-    move();
-    if (screenSaver == true) {
-      yPaddleRight = ball[ballCounter].y - heightPaddle*1/2;
+    public void leftDownSetter() {
+      leftDown = true;
+      leftUp = false;
     }
-  }//end rightPaddle
-
-  void move() {
-    if (leftUp == true) { 
-      yPaddleLeft = yPaddleLeft - leftPaddleVelocity;
-    } else if (leftDown == true) {
-      yPaddleLeft = yPaddleLeft + leftPaddleVelocity;
-    } else if (rightUp == true) {
-      yPaddleRight = yPaddleRight - rightPaddleVelocity;
-    } else if (rightDown == true) {
-      yPaddleRight = yPaddleRight + rightPaddleVelocity;
-    } else {
-      rightPaddleVelocity = 0;
-      leftPaddleVelocity = 0;
+    public void rightUpSetter() {
+      rightUp = true;
+      rightDown = false;
     }
-    if (yPaddleLeft >= (height-heightPaddle)) yPaddleLeft = height - heightPaddle; 
-    if (yPaddleLeft < height*0) yPaddleLeft = height*0; 
-    if (yPaddleRight > (height-heightPaddle)) yPaddleRight = height - heightPaddle; 
-    if (yPaddleRight < height*0) yPaddleRight = height*0;
-  }//end move
+    public void rightDownSetter() {
+      rightDown = true;
+      rightUp = false;
+    }
 
-  void momentumAddToBall() {
-  }//end momentumAddTooBall
-  //if the paddle is moving, increase the movement of the ball in the direction of the paddle
-  //if the paddle is stationary, increase the x-axis movement only
-  //ability is controlled in configuration (on or off)
-
-  public void leftUpSetter() {
-    leftUp = true;
-    leftDown = false;
-  }
-  public void leftDownSetter() {
-    leftDown = true;
-    leftUp = false;
-  }
-  public void rightUpSetter() {
-    rightUp = true;
-    rightDown = false;
-  }
-  public void rightDownSetter() {
-    rightDown = true;
-    rightUp = false;
-  }
-
-  boolean twoPlayerGetter () {
-    return twoPlayer;
-  }
-  boolean singlePlayerGetter () {
-    return singlePlayer;
-  }
-  boolean leftModeSetter () {
-    return leftMode = true;
-  } 
-  boolean rightModeSetter () {
-    return rightMode = true;
-  }
-  boolean leftModeGetter () {
-    return leftMode;
-  } 
-  boolean rightModeGetter () {
-    return rightMode;
-  }
+    boolean twoPlayerGetter () {
+      return twoPlayer;
+    }
+    boolean singlePlayerGetter () {
+      return singlePlayer;
+    }
+    boolean leftModeSetter () {
+      return leftMode = true;
+    } 
+    boolean rightModeSetter () {
+      return rightMode = true;
+    }
+    boolean leftModeGetter () {
+      return leftMode;
+    } 
+    boolean rightModeGetter () {
+      return rightMode;
+    }
 
 
-  //float xPaddleLeftGetter(){ return xPaddleLeft; }
-  //float yPaddleLeftGetter(){ return yPaddleLeft; }
-  //float xPaddleRightGetter(){ return xPaddleRight; }
-  //float yPaddleRightGetter(){ return xPaddleRight; }
-  //float heightPaddleGetter(){ return heightPaddle; }
-  //float widthPaddleGetter(){ return widthPaddle; }
-}//end Paddle
+    //float xPaddleLeftGetter(){ return xPaddleLeft; }
+    //float yPaddleLeftGetter(){ return yPaddleLeft; }
+    //float xPaddleRightGetter(){ return xPaddleRight; }
+    //float yPaddleRightGetter(){ return xPaddleRight; }
+    //float heightPaddleGetter(){ return heightPaddle; }
+    //float widthPaddleGetter(){ return widthPaddle; }
+  }//end Paddle
