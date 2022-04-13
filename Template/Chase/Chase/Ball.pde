@@ -72,19 +72,23 @@ class Ball {
   }//end Bounce
 
   void starChase() {
-    if (x < targetX) {
-      x += sqrt(2);
-      y += sqrt(2);
-    } else {
-      x += (sqrt(2))*-1;
+    //woks when x<targetX and y<targetY
+    if (x < targetX || x > targetX) {
+      x += ( (targetX - x)/(targetY - y) );
+    //} else {
+      //x += ( (targetX - x)/(targetY - y) );
     }
+   
     //
-    if (y < targetY) {
-      y += sqrt(2);
-      x += sqrt(2);
-    } else {
-      y += (sqrt(2))*-1;
+    
+    if (y < targetY || y > targetY) {
+      y += ( (targetY - y)/(targetX - x) );
+    //} else {
+      //y += ( (targetY - y)/(targetX - x) );
     }
+    
+   
+     
   }//end starChase
 
 
