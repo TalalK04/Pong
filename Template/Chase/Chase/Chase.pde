@@ -13,8 +13,6 @@ void setup() {
   //Portrait, not landscape or square
   display();
   starsPop();
-  if (setTarget == false) println("Hello");
-  if (setTarget == true) println ("False");
 }//end setup
 
 void draw() {
@@ -33,7 +31,6 @@ if(mousePressed){
   for (Ball star : stars) {
     star.setTargetX(mouseX); 
     star.setTargetY(mouseY);
-  }
-}
-
+  }//end FOR
+}//end IF
 }//end mousePressed

@@ -6,10 +6,6 @@ class Ball {
   private boolean nightMode = false;
   private boolean rightGoal = false, leftGoal = false;
   private float xMovement, yMovement;
-  //private float distX = dist(x, targetX);
-  //boolean leftPaddleHit = false, rightPaddleHit = false;
-
-  //
   //int ballCount = 10; //(Static Variable: Do not need an object. True sense of Final Global Varibale)
   //Knows how many instances of BALL there are - Not just myBall and yourBall
 
@@ -73,7 +69,6 @@ class Ball {
   }//end Bounce
 
   void starChase() {
-
     xMovement = abs(targetX - x);
     yMovement = abs(targetY - y);
     if (x < targetX) {
@@ -88,36 +83,35 @@ class Ball {
       y -= yMovement/15;
       ;
     }
-    
+
     if (setTarget == true && blackhole == true) {
       fill(0);
-      ellipse(targetX, targetY, smallerDisplayDimension*1/3.8, smallerDisplayDimension*1/3.8); 
+      ellipse(targetX, targetY, smallerDisplayDimension*1/3.8, smallerDisplayDimension*1/3.8);
     }
-    }//end starChase
+  }//end starChase
 
+  void setTargetX(int iParameter) {
+    targetX = iParameter;
+    setTarget = true;
+    blackhole = true;
+  }// end setTargetX
 
-    void setTargetX(int iParameter) {
-      targetX = iParameter;
-      setTarget = true;
-      blackhole = true;
-    }// end setTargetX
+  void setTargetY(int iParameter) {
+    targetY = iParameter;
+    setTarget = true;
+    blackhole = true;
+  }// end setTargetY
 
-    void setTargetY(int iParameter) {
-      targetY = iParameter;
-      setTarget = true;
-      blackhole = true;
-    }// end setTargetY
-
-    boolean rightGoalGetter() {
-      return rightGoal;
-    }
-    boolean leftGoalGetter() {
-      return leftGoal;
-    }
-    boolean rightGoalSetter() {
-      return rightGoal = false;
-    }
-    boolean leftGoalSetter() {
-      return leftGoal = false;
-    }
-  }//End ball
+  boolean rightGoalGetter() {
+    return rightGoal;
+  }
+  boolean leftGoalGetter() {
+    return leftGoal;
+  }
+  boolean rightGoalSetter() {
+    return rightGoal = false;
+  }
+  boolean leftGoalSetter() {
+    return leftGoal = false;
+  }
+}//End ball
