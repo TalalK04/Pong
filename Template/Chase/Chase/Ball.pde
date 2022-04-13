@@ -5,6 +5,7 @@ class Ball {
   private int xSpeed, ySpeed;
   private boolean nightMode = false;
   private boolean rightGoal = false, leftGoal = false;
+  private float xMovement, yMovement;
   //private float distX = dist(x, targetX);
   //boolean leftPaddleHit = false, rightPaddleHit = false;
 
@@ -72,44 +73,51 @@ class Ball {
   }//end Bounce
 
   void starChase() {
-    //woks when x<targetX and y<targetY
-    if (x < targetX || x > targetX) {
-      x += ( (targetX - x)/(targetY - y) );
-    //} else {
-      //x += ( (targetX - x)/(targetY - y) );
+
+    xMovement = abs(targetX - x);
+    yMovement = abs(targetY - y);
+    if (x < targetX) {
+      x += xMovement/15;
+    } else {
+      x -=  xMovement/15;
     }
-   
     //
-    
-    if (y < targetY || y > targetY) {
-      y += ( (targetY - y)/(targetX - x) );
-    //} else {
-      //y += ( (targetY - y)/(targetX - x) );
+    if (y < targetY ) {
+      y += yMovement/15;
+    } else {
+      y -= yMovement/15;
+      ;
     }
     
-   
-     
-  }//end starChase
+    if (setTarget == true && blackhole == true) {
+      fill(0);
+      ellipse(targetX, targetY, smallerDisplayDimension*1/3.8, smallerDisplayDimension*1/3.8); 
+    }
+    }//end starChase
 
 
-  void setTargetX(int iParameter) {
-    targetX = iParameter;
-  }// end setTargetX
+    void setTargetX(int iParameter) {
+      targetX = iParameter;
+      setTarget = true;
+      blackhole = true;
+    }// end setTargetX
 
-  void setTargetY(int iParameter) {
-    targetY = iParameter;
-  }// end setTargetY
+    void setTargetY(int iParameter) {
+      targetY = iParameter;
+      setTarget = true;
+      blackhole = true;
+    }// end setTargetY
 
-  boolean rightGoalGetter() {
-    return rightGoal;
-  }
-  boolean leftGoalGetter() {
-    return leftGoal;
-  }
-  boolean rightGoalSetter() {
-    return rightGoal = false;
-  }
-  boolean leftGoalSetter() {
-    return leftGoal = false;
-  }
-}//End ball
+    boolean rightGoalGetter() {
+      return rightGoal;
+    }
+    boolean leftGoalGetter() {
+      return leftGoal;
+    }
+    boolean rightGoalSetter() {
+      return rightGoal = false;
+    }
+    boolean leftGoalSetter() {
+      return leftGoal = false;
+    }
+  }//End ball

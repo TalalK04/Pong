@@ -44,6 +44,7 @@ void draw() {
   }
   for (int i=0; i<ballCounter; i++ ) {
     if (ball[i].leftGoal == true || ball[i].rightGoal == true) {
+      println("Goalll");
       restart = true;
       goalScored();
     }
@@ -89,7 +90,7 @@ void choosePlayerNum() {
 }//end choosePlayerNum
 
 void keyPressed() {
-  if (gameStart == false && ( key == CODED && (key == 'r' || key == 'R') )) restart = false;
+  if (gameStart == false && ( key == CODED && (key == 'r' || key == 'R') )) gameStart();
 
   //Left Paddle
   if ((key == 'W' || key == 'w') && (paddle.singlePlayerGetter() == true || paddle.twoPlayerGetter() == true )) {
@@ -152,9 +153,7 @@ void goalScored() {
   background(0);
   fill(255); 
   textSize(width*1/35);
-  text("GOALLL! \n Press 'r' to play again", width*1/2, height*1/2);
-  
-    
+  text("GOALLL! \n Press 'r' to play again", width*1/2, height*1/2);  
 }
 
 
