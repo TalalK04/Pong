@@ -1,8 +1,5 @@
-void scoreBoard() {
-  textSetup();
-}//end ScoreBoard
-
 void scoreBoardDraw() {
+  textSetup();
   if (rightGoal == true) {
     leftScore = leftScore + 1;
     textDraw(height, blackInk, CENTER, CENTER, titleFont, str(leftScore), xLeftScore, yLeftScore, widthScore, heightScore); //Left Score

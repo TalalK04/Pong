@@ -12,9 +12,9 @@
 private class Ball {
   //Global Variables
   private float x, y, diameter, xStart, yStart, xDirection, yDirection;
-  private color colour, colourReset = #FFFFFF;
+  //private color colour, colourReset = #FFFFFF;
   private int xSpeed, ySpeed;
-  private boolean nightMode = false;
+
   private boolean rightGoal = false, leftGoal = false;
   private boolean godMode = false;
   private int bounce = 0;
@@ -30,27 +30,25 @@ private class Ball {
     xStart = x; //Location Specifically at Game Start, middle of field
     yStart = y;
     diameter =  width*1/30;
-    if (nightMode == false) colour = color( random(0, 255), random(255), random(255) ); //Hexidecimal: #1FF03, Night Mode friendly
-    if (nightMode == true) colour = color( random(0, 255), random(255), 0 );
     xSpeed = int ( random (width/width, width/width*5) );
     ySpeed = int ( random (height/height, height/height*5) );
     while (xSpeed>-2 && xSpeed<2) xSpeed = int(random( -3, 3));
-    while (ySpeed>-2 && ySpeed<2) ySpeed = int(random( -3, 3)); 
+    while (ySpeed>-2 && ySpeed<2) ySpeed = int(random( -3, 3));
   }//end Ball Constructor
-  
+
   //Start Start Constructor
-   Ball(float widthParameter, float heightParameter, float diameterParameter) {
+  Ball(float widthParameter, float heightParameter, float diameterParameter) {
     //THIS is not used here
     x = widthParameter; //Start Ball Location wherever
     y = heightParameter;
     diameter =  diameterParameter;
-    colour = (nightMode == false) ? color (random(255), random(255), random(255)) : color (random(255), random(255), 0);
+    
   }//end Star Constructor
 
   private void ballDraw() {
     fill(colour);
     ellipse(x, y, diameter, diameter);
-    fill(colourReset);
+    //fill(colourReset);
     //
     ballMove();
     bounceWall();
@@ -58,11 +56,11 @@ private class Ball {
     Goal();
     bounceCount();
   }// end draw
-  
-    private void starDraw() {
+
+  private void starDraw() {
     fill(colour);
     ellipse(x, y, diameter, diameter);
-    fill(colourReset);
+    //fill(colourReset);
     //
     ballMove();
     bounceWall();
@@ -74,28 +72,27 @@ private class Ball {
   private void ballMove() {
     x += xSpeed;
     y += ySpeed;
-    }//end move
+  }//end move
 
-    void bounceWall() {
+  void bounceWall() {
     if (y-diameter*1/2 < height*0 || y+diameter*1/2 > height) {
       ySpeed *= -1; //Top and Bottom
       bounce += 1;
     } else bounce += 0;
-    }//end Bounce
+  }//end Bounce
 
-    private void bouncePaddle() {
+  private void bouncePaddle() {
     if ((x <= paddle.xPaddleLeft + (paddle.widthPaddle + diameter*1/2)) && ((y >= paddle.yPaddleLeft) && (y <= (paddle.yPaddleLeft + paddle.heightPaddle)))) {
       xSpeed *= -1;
       bounce += 1;
-    }  else bounce += 0;
+    } else bounce += 0;
     if ((x >= paddle.xPaddleRight - (diameter*1/2)) && ((y >= paddle.yPaddleRight) && (y <= (paddle.yPaddleRight + paddle.heightPaddle)))) {
       xSpeed*=-1;
       bounce += 1;
     } else bounce += 0;
-    
-    }//end bouncePaddle
+  }//end bouncePaddle
 
-    private void Goal() {
+  private void Goal() {
     if (rightGoal == true) {
       x = (net.x1RightNet + (diameter*2/3));
       ySpeed = 0;
@@ -103,7 +100,7 @@ private class Ball {
       bounce += 1;
     } else {
       rightGoal = false; 
-      scoreBoard.leftScoreGetter();
+      paddle.leftScoreGetter();
       bounce += 0;
     }
     if (leftGoal == true) {
@@ -112,7 +109,7 @@ private class Ball {
       xSpeed = 0;
     } else {
       leftGoal = false;
-      scoreBoard.rightScoreGetter();
+      paddle.rightScoreGetter();
     }
 
 
@@ -122,19 +119,33 @@ private class Ball {
     if (x < net.x1LeftNet +(diameter*1/2)) {
       leftGoal = true;
     }
-    }//end Goal
-    
-    private void bounceCount(){
-     if (bounce == 5) { 
-    paddle.heightPaddle = height*1/6;
-  } else if (bounce == 10) { 
-    paddle.heightPaddle = height*1/9;
-  } else if (bounce == 15) { 
-    paddle.heightPaddle = height*1/12;
-  } else if (bounce == 20) { 
-    paddle.heightPaddle = height*1/15;
-  }
-    }//end bounceCount
+  }//end Goal
+
+  private void bounceCount() {
+    if (bounce == 5) { 
+      paddle.heightPaddle = height*1/6;
+    } else if (bounce == 10) { 
+      paddle.heightPaddle = height*1/9;
+    } else if (bounce == 15) { 
+      paddle.heightPaddle = height*1/12;
+    } else if (bounce == 20) { 
+      paddle.heightPaddle = height*1/15;
+    }
+  }//end bounceCount
+  
+  private void resetBall() {
+     x = width*1/2; //Start Ball Location wherever
+    y = height*1/2;
+  }//end resetBall
+  
+  
+ void momentumAddToBall() {
+  
+}//end momentumAddTooBall
+
+//if the paddle is moving, increase the movement of the ball in the direction of the paddle
+//if the paddle is stationary, increase the x-axis movement only
+//ability is controlled in configuration (on or off)
 
   boolean rightGoalGetter() {
     return rightGoal;
@@ -148,8 +159,12 @@ private class Ball {
   boolean leftGoalSetter() {
     return leftGoal = false;
   }
-  
+
   float ballYGetter () {
     return y;
   }
+  
+  //boolean Setter(){
+  // return nightMode = false; 
+  //}
 }//End ball
