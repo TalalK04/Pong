@@ -14,8 +14,6 @@ boolean gameStart = false;
 boolean nightMode = false;
 color colour;
 
-
-
 void setup() {
   ball[ballCounter] = new Ball(width, height); //Start the first ball, need ballCounter
   paddle = new Paddle(width, height);
@@ -24,10 +22,6 @@ void setup() {
   size(1500, 1200);
   if (height < width) landscapeMode = true;
   //
-  
-  
-
-
   if (nightMode == false) colour = color( 255 ); //Hexidecimal: #1FF03, Night Mode friendly
   else colour = color( 255, 255, 0 ); 
 }//end setup
@@ -64,8 +58,17 @@ void gameStart() {
   //gameStart = true;
 }//end gameStart
 
-
-
+void goalScored() {
+  background(0);
+  for (int i=0; i<ballCounter; i++ ) {//Controls each ball of all 10 (ballCount)
+    //ballCount = 0;
+    ball[i] = new Ball(width, height);
+    ball[i].ballDraw();
+  }//end ball.draw
+  fill(255); 
+  textSize(width*1/35);
+  text("GOALLL! \n Press 'r' to play again", width*1/2, height*1/2);
+}
 
 void scoreBoardDraw() {
   paddle.textSetup();
@@ -91,9 +94,8 @@ void keyPressed() {
   if (gameStart == false && ( key == CODED && (key == 'r' || key == 'R') )) gameStart();
 
   //nightMode
-  if (key == 'n' || key == 'N' && (paddle.leftMode == true) ) nightMode = true; paddle.chooseMode = true; println("nightMode");
-  if (key == 'q' || key == 'Q' && (paddle.leftMode == true)) nightMode = false; paddle.chooseMode = true; println("false");
-
+  if ((key == 'n' || key == 'N') && (paddle.leftMode == true) ) nightMode = true; paddle.chooseMode = true; 
+  if ((key == 'q' || key == 'Q') && (paddle.leftMode == true)) nightMode = false; paddle.chooseMode = true; 
 
 
 //Left Paddle
