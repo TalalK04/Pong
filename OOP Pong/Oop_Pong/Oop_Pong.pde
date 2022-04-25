@@ -3,7 +3,9 @@
 
 int mouse = 0;
 int ballCount = 10;
+int starCounter = 4;
 Ball[] ball = new Ball[ballCount]; //Not just an array, but an array list: includes code and variable
+Ball[] stars = new Ball[starCounter]; 
 int ballCounter = ball.length - ball.length; //How to get 0 but using another value
 Paddle paddle;
 Net net;
@@ -11,11 +13,15 @@ boolean landscapeMode = false;
 boolean restart = false;
 int Size;
 boolean gameStart = false;
-
+float starX, starY, starDiameter;
 color colour;
 
 void setup() {
   ball[ballCounter] = new Ball(width, height); //Start the first ball, need ballCounter
+  for(int i=0; i<stars.length; i++){
+  stars[starCounter] = new Ball(width, height);
+  }
+  
   paddle = new Paddle(width, height);
   net = new Net(width, height);
   ballCounter += 1;
@@ -37,6 +43,11 @@ void draw() {
   if ((landscapeMode == true)  && (paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (paddle.screenSaver == true || paddle.singlePlayer == true || paddle.twoPlayer == true) && restart == false) {
     gameStart();
   }
+  
+   for ( int i=0; i<stars.length; i++ ) {
+    stars[i].starDraw();
+  }//end for population
+  
   for (int i=0; i<ballCounter; i++ ) {
     if (ball[i].leftGoalGetter() == true || ball[i].rightGoalGetter() == true) {
       //println("Goalll");

@@ -38,12 +38,13 @@ private class Ball {
     if (nightMode == true) this.colour = color(int (random(100, 255)), int (random(50, 255)), 0);
   }//end Ball Constructor
 
-  //Start Start Constructor
+  //Start Star Constructor
   Ball(float widthParameter, float heightParameter, float diameterParameter) {
     //THIS is not used here
     x = widthParameter; //Start Ball Location wherever
     y = heightParameter;
     diameter =  diameterParameter;
+    //float diameterParameter
     
   }//end Star Constructor
 
