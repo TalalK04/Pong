@@ -7,9 +7,9 @@
 
 class Paddle {
   //Global Variables
-  //private color colour;
+  private color colour;
   private float xPaddleLeft, yPaddleLeft, widthPaddle, heightPaddle, xPaddleRight, yPaddleRight;
-  //private boolean nightMode = false;
+  private boolean nightMode = false;
   private boolean leftUp = false, leftDown = false, rightUp = false, rightDown = false, rightStop = false, leftStop = true;
   private int leftPaddleVelocity = 0, rightPaddleVelocity = 0;
   private boolean leftMode = false;
@@ -18,16 +18,17 @@ class Paddle {
   private boolean screenSaver = false;
   private boolean twoPlayer = false;
   private int leftScore = 0, rightScore = 0;
+  
   private float xLeftScore, xRightScore, yLeftScore, yRightScore, widthScore, heightScore;
   private PFont titleFont;
   private color scoreColour = 000000; 
-  boolean nightMode = false, chooseMode = false;
+  private boolean chooseMode = false;
   
 
   //
   Paddle(float width, float height) { // General Population
-    //if (nightMode == false) this.colour = color(int (random(100, 255)), int (random(50, 255)), int (random(175, 255)));
-    //if (nightMode == true) this.colour = color(int (random(100, 255)), int (random(50, 255)), 0);
+    if (nightMode == false) this.colour = color(int (random(100, 255)), int (random(50, 255)), int (random(175, 255)));
+    if (nightMode == true) this.colour = color(int (random(100, 255)), int (random(50, 255)), 0);
     widthPaddle = int(width*1/55);
     xPaddleLeft = int(width*1/40);
     xPaddleRight = int(width*39/40) - widthPaddle;

@@ -12,11 +12,11 @@
 private class Ball {
   //Global Variables
   private float x, y, diameter, xStart, yStart, xDirection, yDirection;
-  //private color colour, colourReset = #FFFFFF;
+  private color colour, colourReset = #FFFFFF;
   private int xSpeed, ySpeed;
-
   private boolean rightGoal = false, leftGoal = false;
   private boolean godMode = false;
+   private boolean nightMode = false;
   private int bounce = 0;
   //boolean leftPaddleHit = false, rightPaddleHit = false;
 
@@ -34,6 +34,8 @@ private class Ball {
     ySpeed = int ( random (height/height, height/height*5) );
     while (xSpeed>-2 && xSpeed<2) xSpeed = int(random( -3, 3));
     while (ySpeed>-2 && ySpeed<2) ySpeed = int(random( -3, 3));
+        if (nightMode == false) this.colour = color(int (random(100, 255)), int (random(50, 255)), int (random(175, 255)));
+    if (nightMode == true) this.colour = color(int (random(100, 255)), int (random(50, 255)), 0);
   }//end Ball Constructor
 
   //Start Start Constructor
@@ -115,9 +117,13 @@ private class Ball {
 
     if (x > net.x1RightNet - (diameter*1/2)) {
       rightGoal = true;
+      x = width - diameter*1/2;
+      y = y;
     } 
     if (x < net.x1LeftNet +(diameter*1/2)) {
       leftGoal = true;
+       x = width*0 + diameter*1/2;
+      y = y;
     }
   }//end Goal
 

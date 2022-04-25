@@ -11,7 +11,7 @@ boolean landscapeMode = false;
 boolean restart = false;
 int Size;
 boolean gameStart = false;
-boolean nightMode = false;
+
 color colour;
 
 void setup() {
@@ -22,8 +22,7 @@ void setup() {
   size(1500, 1200);
   if (height < width) landscapeMode = true;
   //
-  if (nightMode == false) colour = color( 255 ); //Hexidecimal: #1FF03, Night Mode friendly
-  else colour = color( 255, 255, 0 ); 
+  
 }//end setup
 
 
@@ -33,7 +32,7 @@ void draw() {
   background(0);
 
   if (landscapeMode == false) preGameStart();
-  if ((landscapeMode == true)  && (paddle.leftMode == false || paddle.rightMode == false) && (paddle.chooseMode == true)) chooseMode();
+  if ((landscapeMode == true)  && (paddle.leftMode == false || paddle.rightMode == false) ) chooseMode();
   if ((landscapeMode == true)  && (paddle.leftMode == true && paddle.rightMode == true) && (paddle.singlePlayerGetter() == false && paddle.screenSaver == false && paddle.twoPlayer == false)) choosePlayerNum();
   if ((landscapeMode == true)  && (paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (paddle.screenSaver == true || paddle.singlePlayer == true || paddle.twoPlayer == true) && restart == false) {
     gameStart();
@@ -94,8 +93,8 @@ void keyPressed() {
   if (gameStart == false && ( key == CODED && (key == 'r' || key == 'R') )) gameStart();
 
   //nightMode
-  if ((key == 'n' || key == 'N') && (paddle.leftMode == true) ) nightMode = true; paddle.chooseMode = true; 
-  if ((key == 'q' || key == 'Q') && (paddle.leftMode == true)) nightMode = false; paddle.chooseMode = true; 
+  //if ((key == 'n' || key == 'N') && (paddle.leftMode == true) ) nightMode = true; paddle.chooseMode = true; 
+  //if ((key == 'q' || key == 'Q') && (paddle.leftMode == true)) nightMode = false; paddle.chooseMode = true; 
 
 
 //Left Paddle
