@@ -15,20 +15,20 @@ int Size;
 boolean gameStart = false;
 float starX, starY, starDiameter;
 color colour;
+boolean overlapping = true, enterStars = false, collision = false;
 
 void setup() {
   ball[ballCounter] = new Ball(width, height); //Start the first ball, need ballCounter
-  for(int i=0; i<stars.length; i++){
-  stars[starCounter] = new Ball(width, height);
-  }
-  
   paddle = new Paddle(width, height);
   net = new Net(width, height);
   ballCounter += 1;
   size(1500, 1200);
   if (height < width) landscapeMode = true;
-  //
-  
+  stars();
+
+
+  //  }//end IF
+  //}//end FOR
 }//end setup
 
 
@@ -43,11 +43,7 @@ void draw() {
   if ((landscapeMode == true)  && (paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (paddle.screenSaver == true || paddle.singlePlayer == true || paddle.twoPlayer == true) && restart == false) {
     gameStart();
   }
-  
-   for ( int i=0; i<stars.length; i++ ) {
-    stars[i].starDraw();
-  }//end for population
-  
+
   for (int i=0; i<ballCounter; i++ ) {
     if (ball[i].leftGoalGetter() == true || ball[i].rightGoalGetter() == true) {
       //println("Goalll");
@@ -65,6 +61,9 @@ void gameStart() {
   for (int i=0; i<ballCounter; i++ ) {//Controls each ball of all 10 (ballCount)
     ball[i].ballDraw();
   }//end ball.draw
+   for ( Ball star : stars) {
+     if (enterStars == true) star.starDraw();
+  }//end for population
   //gameStart = true;
 }//end gameStart
 
@@ -108,48 +107,48 @@ void keyPressed() {
   //if ((key == 'q' || key == 'Q') && (paddle.leftMode == true)) nightMode = false; paddle.chooseMode = true; 
 
 
-//Left Paddle
-if ((key == 'W' || key == 'w') && (paddle.singlePlayerGetter() == true || paddle.twoPlayerGetter() == true )) {
-  paddle.leftUpSetter();
-} 
-if ((key == 'S' || key == 's') && (paddle.singlePlayerGetter() == true || paddle.twoPlayerGetter() == true)) {
-  paddle.leftDownSetter();
-} 
+  //Left Paddle
+  if ((key == 'W' || key == 'w') && (paddle.singlePlayerGetter() == true || paddle.twoPlayerGetter() == true )) {
+    paddle.leftUpSetter();
+  } 
+  if ((key == 'S' || key == 's') && (paddle.singlePlayerGetter() == true || paddle.twoPlayerGetter() == true)) {
+    paddle.leftDownSetter();
+  } 
 
-if ((paddle.leftPaddleVelocity == 0) && (key == 'e'|| key == 'E')) { //easy
-  paddle.leftPaddleVelocity = 2;
-  paddle.leftMode = true;
-} else if ((paddle.leftPaddleVelocity == 0) && (key == 'm'|| key == 'M')) { //medium
-  paddle.leftPaddleVelocity = 5;
-  paddle.leftMode = true;
-} else if ((paddle.leftPaddleVelocity == 0) && (key == 'h'|| key == 'H')) { //hard
-  paddle.leftPaddleVelocity = 10;
-  paddle.leftMode = true;
-}
+  if ((paddle.leftPaddleVelocity == 0) && (key == 'e'|| key == 'E')) { //easy
+    paddle.leftPaddleVelocity = 2;
+    paddle.leftMode = true;
+  } else if ((paddle.leftPaddleVelocity == 0) && (key == 'm'|| key == 'M')) { //medium
+    paddle.leftPaddleVelocity = 5;
+    paddle.leftMode = true;
+  } else if ((paddle.leftPaddleVelocity == 0) && (key == 'h'|| key == 'H')) { //hard
+    paddle.leftPaddleVelocity = 10;
+    paddle.leftMode = true;
+  }
 
-//Choose Mode
-if ((paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (key == 'p'|| key == 'P')) paddle.singlePlayer = true;
-if ((paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (key == 't'|| key == 'T')) paddle.twoPlayer = true;
-if ((paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (key == 'c'|| key == 'C')) paddle.screenSaver = true;
+  //Choose Mode
+  if ((paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (key == 'p'|| key == 'P')) paddle.singlePlayer = true;
+  if ((paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (key == 't'|| key == 'T')) paddle.twoPlayer = true;
+  if ((paddle.leftModeGetter() == true && paddle.rightModeGetter() == true) && (key == 'c'|| key == 'C')) paddle.screenSaver = true;
 
-//Right Paddle
-if ((key == CODED && keyCode == UP)  && (paddle.twoPlayerGetter() == true)) {
-  paddle.rightUpSetter();
-} 
-if ((key == CODED && keyCode == DOWN)  && (paddle.twoPlayerGetter() == true)) {
-  paddle.rightDownSetter();
-} 
+  //Right Paddle
+  if ((key == CODED && keyCode == UP)  && (paddle.twoPlayerGetter() == true)) {
+    paddle.rightUpSetter();
+  } 
+  if ((key == CODED && keyCode == DOWN)  && (paddle.twoPlayerGetter() == true)) {
+    paddle.rightDownSetter();
+  } 
 
-if ((paddle.rightPaddleVelocity == 0) && (key == '1')) { //easy
-  paddle.rightPaddleVelocity = 2;
-  paddle.rightMode = true;
-} else if ((paddle.rightPaddleVelocity == 0) && (key == '2')) { //medium
-  paddle.leftPaddleVelocity = 5;
-  paddle.rightMode = true;
-} else if ((paddle.rightPaddleVelocity == 0) && (key == '3')) { //hard
-  paddle.rightPaddleVelocity = 10;
-  paddle.rightMode = true;
-}
+  if ((paddle.rightPaddleVelocity == 0) && (key == '1')) { //easy
+    paddle.rightPaddleVelocity = 2;
+    paddle.rightMode = true;
+  } else if ((paddle.rightPaddleVelocity == 0) && (key == '2')) { //medium
+    paddle.leftPaddleVelocity = 5;
+    paddle.rightMode = true;
+  } else if ((paddle.rightPaddleVelocity == 0) && (key == '3')) { //hard
+    paddle.rightPaddleVelocity = 10;
+    paddle.rightMode = true;
+  }
 }//end keyPresseded
 
 void mousePressed() {

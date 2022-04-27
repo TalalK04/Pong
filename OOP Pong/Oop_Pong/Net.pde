@@ -19,4 +19,11 @@ class Net {
     //println(x1RightNet);
   }//end netDraw
   
+  float xLeftNetGetter(){
+    return x1LeftNet;
+  }
+    float xRightNetGetter(){
+    return x1RightNet;
+  }
+  
 }//end class Net

@@ -16,7 +16,7 @@ private class Ball {
   private int xSpeed, ySpeed;
   private boolean rightGoal = false, leftGoal = false;
   private boolean godMode = false;
-   private boolean nightMode = false;
+  private boolean nightMode = false;
   private int bounce = 0;
   //boolean leftPaddleHit = false, rightPaddleHit = false;
 
@@ -32,9 +32,9 @@ private class Ball {
     diameter =  width*1/30;
     xSpeed = int ( random (width/width, width/width*5) );
     ySpeed = int ( random (height/height, height/height*5) );
-    while (xSpeed>-2 && xSpeed<2) xSpeed = int(random( -3, 3));
-    while (ySpeed>-2 && ySpeed<2) ySpeed = int(random( -3, 3));
-        if (nightMode == false) this.colour = color(int (random(100, 255)), int (random(50, 255)), int (random(175, 255)));
+    while (xSpeed>-4 && xSpeed<4) xSpeed = int(random( -5, 5));
+    while (ySpeed>-4 && ySpeed<4) ySpeed = int(random( -5, 5));
+    if (nightMode == false) this.colour = color(int (random(100, 255)), int (random(50, 255)), int (random(175, 255)));
     if (nightMode == true) this.colour = color(int (random(100, 255)), int (random(50, 255)), 0);
   }//end Ball Constructor
 
@@ -44,11 +44,11 @@ private class Ball {
     x = widthParameter; //Start Ball Location wherever
     y = heightParameter;
     diameter =  diameterParameter;
+    colour = color(255);
     //float diameterParameter
-    
   }//end Star Constructor
 
-  private void ballDraw() {
+  public void ballDraw() {
     fill(colour);
     ellipse(x, y, diameter, diameter);
     //fill(colourReset);
@@ -58,18 +58,20 @@ private class Ball {
     bouncePaddle();
     Goal();
     bounceCount();
+    bounceStar();
   }// end draw
 
-  private void starDraw() {
+  public void starDraw() {
     fill(colour);
     ellipse(x, y, diameter, diameter);
     //fill(colourReset);
-    //
+
     ballMove();
     bounceWall();
     bouncePaddle();
     Goal();
     bounceCount();
+    bounceStar();
   }// end draw
 
   private void ballMove() {
@@ -77,7 +79,7 @@ private class Ball {
     y += ySpeed;
   }//end move
 
-  void bounceWall() {
+  private void bounceWall() {
     if (y-diameter*1/2 < height*0 || y+diameter*1/2 > height) {
       ySpeed *= -1; //Top and Bottom
       bounce += 1;
@@ -94,6 +96,14 @@ private class Ball {
       bounce += 1;
     } else bounce += 0;
   }//end bouncePaddle
+  
+  private void bounceStar(){
+      starCollisions();
+    if (collision == true) {
+     xSpeed*=-1.2;
+     ySpeed*=-1.2;
+    }
+  }//end bounceStar
 
   private void Goal() {
     if (rightGoal == true) {
@@ -123,7 +133,7 @@ private class Ball {
     } 
     if (x < net.x1LeftNet +(diameter*1/2)) {
       leftGoal = true;
-       x = width*0 + diameter*1/2;
+      x = width*0 + diameter*1/2;
       y = y;
     }
   }//end Goal
@@ -138,21 +148,22 @@ private class Ball {
     } else if (bounce == 20) { 
       paddle.heightPaddle = height*1/15;
     }
+    
+    if (bounce >= 1) enterStars = true;
   }//end bounceCount
-  
+
   private void resetBall() {
-     x = width*1/2; //Start Ball Location wherever
+    x = width*1/2; //Start Ball Location wherever
     y = height*1/2;
   }//end resetBall
-  
-  
- void momentumAddToBall() {
-  
-}//end momentumAddTooBall
 
-//if the paddle is moving, increase the movement of the ball in the direction of the paddle
-//if the paddle is stationary, increase the x-axis movement only
-//ability is controlled in configuration (on or off)
+
+  void momentumAddToBall() {
+  }//end momentumAddTooBall
+
+  //if the paddle is moving, increase the movement of the ball in the direction of the paddle
+  //if the paddle is stationary, increase the x-axis movement only
+  //ability is controlled in configuration (on or off)
 
   boolean rightGoalGetter() {
     return rightGoal;
@@ -170,7 +181,11 @@ private class Ball {
   float ballYGetter () {
     return y;
   }
-  
+
+  int bounceGetter() {
+    return bounce;
+  }
+
   //boolean Setter(){
   // return nightMode = false; 
   //}
