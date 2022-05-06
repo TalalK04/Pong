@@ -30,8 +30,8 @@ private class Ball {
     xStart = x; //Location Specifically at Game Start, middle of field
     yStart = y;
     diameter =  width*1/30;
-    xSpeed = int ( random (width/width, width/width*5) );
-    ySpeed = int ( random (height/height, height/height*5) );
+    //xSpeed = int ( random (width/width, width/width*5) );
+    //ySpeed = int ( random (height/height, height/height*5) );
     while (xSpeed>-4 && xSpeed<4) xSpeed = int(random( -5, 5));
     while (ySpeed>-4 && ySpeed<4) ySpeed = int(random( -5, 5));
     if (nightMode == false) this.colour = color(int (random(100, 255)), int (random(50, 255)), int (random(175, 255)));
@@ -96,12 +96,12 @@ private class Ball {
       bounce += 1;
     } else bounce += 0;
   }//end bouncePaddle
-  
-  private void bounceStar(){
-      starCollisions();
+
+  private void bounceStar() {
+    starCollisions();
     if (collision == true) {
-     xSpeed*=-1.2;
-     ySpeed*=-1.2;
+      xSpeed*=-1.2;
+      ySpeed*=-1.2;
     }
   }//end bounceStar
 
@@ -148,13 +148,15 @@ private class Ball {
     } else if (bounce == 20) { 
       paddle.heightPaddle = height*1/15;
     }
-    
+
     if (bounce >= 1) enterStars = true;
   }//end bounceCount
 
   private void resetBall() {
     x = width*1/2; //Start Ball Location wherever
     y = height*1/2;
+    xSpeed = 0;
+    ySpeed = 0;
   }//end resetBall
 
 
