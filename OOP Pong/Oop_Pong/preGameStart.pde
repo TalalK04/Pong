@@ -1,5 +1,3 @@
-
- 
 void preGameStart() {
   for (int i=ballCounter-1; i<ballCount; i++ ) {
     ball[i].xSpeed = 0;
