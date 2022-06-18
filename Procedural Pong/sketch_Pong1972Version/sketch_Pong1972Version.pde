@@ -10,7 +10,7 @@ boolean twoPlayer = false;
 boolean restart = false;
 
 void setup() {
-  size(1000, 1100); 
+  size(1200, 1000); 
   population(); 
   if (height < width) landscapeMode = true;
 }//end setup
